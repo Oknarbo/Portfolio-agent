@@ -28,3 +28,29 @@ export function ButtonLink({
     </Link>
   );
 }
+
+// For external URLs and mailto: links (plain anchor, not a Next.js route).
+export function ButtonAnchor({
+  href,
+  children,
+  variant = "primary",
+  external = true,
+}: {
+  href: string;
+  children: ReactNode;
+  variant?: Variant;
+  external?: boolean;
+}) {
+  const isMailto = href.startsWith("mailto:");
+  return (
+    <a
+      href={href}
+      className={`${base} ${variants[variant]}`}
+      {...(external && !isMailto
+        ? { target: "_blank", rel: "noreferrer" }
+        : {})}
+    >
+      {children}
+    </a>
+  );
+}

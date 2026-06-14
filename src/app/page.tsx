@@ -1,5 +1,5 @@
 import { Container } from "@/components/Container";
-import { ButtonLink } from "@/components/Button";
+import { ButtonLink, ButtonAnchor } from "@/components/Button";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import { FeaturedVideo } from "@/components/FeaturedVideo";
 import { profile } from "@/data/profile";
@@ -192,14 +192,61 @@ export default function Home() {
               ) : null}
             </article>
 
-            <div className="mt-8 flex justify-center">
-              <ButtonLink href="/projects" variant="secondary">
-                See all projects →
-              </ButtonLink>
-            </div>
           </Container>
         </section>
       ) : null}
+
+      {/* ── Contact / CTA (immediately after proof — decision moment) ─ */}
+      <section className="py-12">
+        <Container>
+          <div className="mx-auto max-w-4xl rounded-3xl border border-[var(--color-accent)]/25 bg-[var(--color-accent)]/[0.05] p-8 text-center sm:p-12">
+            <p className="text-[13px] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+              Contact
+            </p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Let&apos;s work together
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-[17px] leading-relaxed text-[var(--color-subtle)]">
+              Available for AI automation, agent systems, and API integration
+              work.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <ButtonAnchor href={`mailto:${identity.email}`}>
+                Contact me
+              </ButtonAnchor>
+              <ButtonLink href="/projects" variant="secondary">
+                Explore technical details →
+              </ButtonLink>
+            </div>
+
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[14px] font-medium">
+              <a
+                href={`mailto:${identity.email}`}
+                className="text-[var(--color-accent)] hover:underline"
+              >
+                {identity.email}
+              </a>
+              <a
+                href={identity.github}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[var(--color-accent)] hover:underline"
+              >
+                GitHub ↗
+              </a>
+              <a
+                href={identity.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[var(--color-accent)] hover:underline"
+              >
+                LinkedIn ↗
+              </a>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       {/* ── What I build (technical breakdown) ───────────────────── */}
       <section className="py-12">

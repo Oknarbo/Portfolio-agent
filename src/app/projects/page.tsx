@@ -7,6 +7,12 @@ export const metadata = { title: "Projects" };
 export default function ProjectsPage() {
   const { projects } = profile;
 
+  // Production first, with the featured project leading; secondary work after.
+  const production = projects
+    .filter((p) => p.tier === "production")
+    .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
+  const other = projects.filter((p) => p.tier !== "production");
+
   return (
     <Container className="py-20">
       <header className="mb-14 max-w-2xl">
@@ -19,20 +25,73 @@ export default function ProjectsPage() {
         </p>
       </header>
 
-      <div className="space-y-8">
-        {projects.map((p) => (
-          <ProjectCard key={p.slug} project={p} />
-        ))}
-      </div>
+      {/* ── Production AI Systems (shipped / in real-world use) ───── */}
+      {production.length ? (
+        <section>
+          <CategoryHeader
+            title="Production AI Systems"
+            subtitle="Shipped, real-world systems with actual users."
+          />
+          <div className="mt-8 space-y-8">
+            {production.map((p) => (
+              <ProjectCard key={p.slug} project={p} dominant={p.featured} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* ── Other Projects (side projects & experiments) ─────────── */}
+      {other.length ? (
+        <section className="mt-20">
+          <CategoryHeader
+            title="Other Projects"
+            subtitle="Side projects, experiments, and earlier work."
+          />
+          <div className="mt-8 space-y-8">
+            {other.map((p) => (
+              <ProjectCard key={p.slug} project={p} />
+            ))}
+          </div>
+        </section>
+      ) : null}
     </Container>
   );
 }
 
-function ProjectCard({ project: p }: { project: Project }) {
+function CategoryHeader({
+  title,
+  subtitle,
+}: {
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <div className="border-b border-[var(--color-hairline)]/70 pb-4">
+      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+        {title}
+      </h2>
+      <p className="mt-1.5 text-[15px] text-[var(--color-subtle)]">{subtitle}</p>
+    </div>
+  );
+}
+
+function ProjectCard({
+  project: p,
+  dominant = false,
+}: {
+  project: Project;
+  dominant?: boolean;
+}) {
   const outcome = p.outcome ?? p.impact;
 
   return (
-    <article className="overflow-hidden rounded-3xl border border-[var(--color-hairline)]/70 bg-[var(--color-surface)] transition-shadow hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
+    <article
+      className={
+        dominant
+          ? "overflow-hidden rounded-3xl border-2 border-[var(--color-accent)]/35 bg-[var(--color-surface)] shadow-[0_8px_40px_rgba(0,0,0,0.06)] ring-1 ring-[var(--color-accent)]/10"
+          : "overflow-hidden rounded-3xl border border-[var(--color-hairline)]/70 bg-[var(--color-surface)] transition-shadow hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)]"
+      }
+    >
       <div className="p-8">
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-3">
@@ -48,7 +107,13 @@ function ProjectCard({ project: p }: { project: Project }) {
                 </span>
               ) : null}
             </div>
-            <h2 className="mt-1 text-2xl font-semibold tracking-tight">
+            <h2
+              className={
+                dominant
+                  ? "mt-1 text-2xl font-semibold tracking-tight sm:text-3xl"
+                  : "mt-1 text-2xl font-semibold tracking-tight"
+              }
+            >
               {p.title}
             </h2>
             <p className="mt-1 max-w-2xl text-[var(--color-subtle)]">
