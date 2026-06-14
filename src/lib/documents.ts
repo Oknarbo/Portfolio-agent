@@ -91,6 +91,17 @@ export function buildDocuments(): SourceDocument[] {
       title: p.title,
       content: `Project: ${p.title} (${p.category}). ${p.tagline} Problem: ${p.problem} Solution: ${p.solution} Impact: ${p.impact} ${extra} Tech stack: ${p.stack.join(", ")}.`,
     });
+
+    if (p.production) {
+      docs.push({
+        id: `project-${p.slug}-production`,
+        source: "project",
+        title: `${p.title} — production usage and real-world impact`,
+        content: `Real-world usage of ${p.title}: ${p.production.note} ${p.production.usage} Engineering impact: ${p.production.impactSignals.join(
+          " "
+        )} Iteration: ${p.production.iteration}`,
+      });
+    }
   });
 
   github.forEach((g, i) => {

@@ -120,6 +120,47 @@ function ProjectCard({ project: p }: { project: Project }) {
           </p>
         </div>
 
+        {/* Production usage / impact layer */}
+        {p.production ? (
+          <div className="mt-6 rounded-2xl border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/[0.04] p-5 sm:p-6">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
+              </span>
+              <FieldLabel>In production</FieldLabel>
+            </div>
+            <p className="mt-2 text-[15px] font-medium leading-relaxed text-[var(--color-ink)]">
+              {p.production.note}
+            </p>
+            <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-subtle)]">
+              {p.production.usage}
+            </p>
+
+            <h4 className="mt-5 text-[12px] font-semibold uppercase tracking-wider text-[var(--color-subtle)]">
+              Engineering impact
+            </h4>
+            <ul className="mt-2 space-y-2">
+              {p.production.impactSignals.map((s) => (
+                <li
+                  key={s}
+                  className="flex gap-2.5 text-[14px] leading-relaxed text-[var(--color-ink)]"
+                >
+                  <Check />
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h4 className="mt-5 text-[12px] font-semibold uppercase tracking-wider text-[var(--color-subtle)]">
+              Iteration loop
+            </h4>
+            <p className="mt-2 text-[14px] leading-relaxed text-[var(--color-subtle)]">
+              {p.production.iteration}
+            </p>
+          </div>
+        ) : null}
+
         {/* Tech stack */}
         <div className="mt-6">
           <FieldLabel>Tech stack</FieldLabel>

@@ -37,6 +37,14 @@ export type Video = { id: string; title: string };
 
 export type Metric = { value: string; label: string };
 
+// Factual "impact layer" for shipped projects with real users.
+export type ProductionImpact = {
+  note: string; // one-line, factual usage signal (no inflated scale)
+  usage: string; // who uses it and what they actually do in their workflow
+  impactSignals: string[]; // engineering work framed as production value
+  iteration: string; // how real usage feedback shapes the product
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -49,6 +57,7 @@ export type Project = {
   architecture?: string;
   challenges?: string[];
   outcome?: string;
+  production?: ProductionImpact;
   videos?: Video[];
   metrics?: Metric[];
   featured?: boolean;
@@ -275,6 +284,20 @@ export const profile: Profile = {
       ],
       outcome:
         "A commercially launched (v2.0.1) desktop product on Windows and macOS that passed independent AI security reviews (88/100 GPT-4o, 80/100 Grok) and Bandit static analysis with zero medium/high findings.",
+      production: {
+        note: "Small but real: ~14 early production users — music producers running it inside their day-to-day Ableton Live sessions.",
+        usage:
+          "The users are music producers who keep Profesor Abelton open next to Ableton Live while they work. Instead of pausing to search forums or watch tutorials, they ask it in plain language — \u201Cadd a MIDI track\u201D, \u201Chow do I add a device\u201D, \u201Canalyse my session\u201D — and it reads the live session state and either answers or performs the action directly in the project. The assistant sits inside the creative loop rather than in a separate tab.",
+        impactSignals: [
+          "Real-time session sync: full Ableton state (tracks, clips, devices, tempo) streams over WebSockets, so answers reflect the project as it is right now — not a stale snapshot.",
+          "Stays usable mid-session: a Groq fast-path answers quick queries in under a second while Claude handles complex reasoning.",
+          "Safe to run in a live project: a 40-action allowlist, parameter sanitization, and a 12-command batch limit stop the AI from damaging a producer's work.",
+          "Resilient in real use: failures from Ableton, the LLM APIs, or the network are caught and surfaced instead of crashing the session.",
+          "Local-first and private: it runs on the user's machine with Fernet-encrypted API keys — nothing about their projects leaves the device except the LLM calls they trigger.",
+        ],
+        iteration:
+          "The product is shaped by how this small group actually uses it. Real sessions surface edge cases demos never do — unusual project layouts, unexpected phrasings, device combinations — and those drive the fixes and new tools in each release. It evolves through live usage feedback, not a roadmap written in isolation.",
+      },
       metrics: [
         { value: "v2.0.1", label: "Commercially launched" },
         { value: "35", label: "Schema-validated MCP tools" },

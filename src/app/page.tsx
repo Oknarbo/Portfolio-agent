@@ -129,6 +129,16 @@ export default function Home() {
                     {featured.tagline}
                   </p>
 
+                  {featured.production?.note ? (
+                    <p className="mt-4 flex gap-2.5 rounded-xl bg-[var(--color-accent)]/[0.06] px-3.5 py-2.5 text-[14px] leading-relaxed text-[var(--color-ink)]">
+                      <span className="relative mt-1.5 flex h-2 w-2 flex-shrink-0">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-60" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
+                      </span>
+                      <span>{featured.production.note}</span>
+                    </p>
+                  ) : null}
+
                   {featured.challenges?.length ? (
                     <ul className="mt-5 space-y-2">
                       {featured.challenges.map((ch) => (
