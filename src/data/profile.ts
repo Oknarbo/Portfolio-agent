@@ -50,10 +50,11 @@ export type Project = {
   title: string;
   tagline: string;
   // Maturity / delivery classification:
-  // "production" = shipped, deployed, and maintained systems.
+  // "production" = core, flagship AI systems — shipped and maintained.
   // "wip"        = actively in development, not yet shipped.
-  // "experiment" = proof-of-concept, exploration, or reference work.
-  maturity: "production" | "wip" | "experiment";
+  // "shipped"    = finished, production-ready products outside the core AI focus.
+  // "experiment" = proof-of-concept or exploration.
+  maturity: "production" | "wip" | "shipped" | "experiment";
   category: "AI" | "Automation" | "Blockchain" | "Agent Systems" | "Other";
   stack: string[];
   problem: string;
@@ -395,7 +396,7 @@ export const profile: Profile = {
       slug: "solana-automation",
       title: "Solana Automation Tools",
       tagline: "A suite of Python tools for the Solana ecosystem: trading, tokens, and real-time events.",
-      maturity: "experiment",
+      maturity: "shipped",
       category: "Blockchain",
       stack: ["Python", "Solana", "SPL", "WebSockets", "REST APIs"],
       problem:
@@ -415,7 +416,7 @@ export const profile: Profile = {
       slug: "forex-automation",
       title: "Forex Automation System",
       tagline: "Automated trading and risk-management tooling in C#.",
-      maturity: "experiment",
+      maturity: "shipped",
       category: "Automation",
       stack: ["C#", "cTrader / cAlgo"],
       problem:
@@ -429,7 +430,7 @@ export const profile: Profile = {
       slug: "x-trending-monitor",
       title: "X Trending Monitor",
       tagline: "A live dashboard for the top 30 trending topics on X (Twitter).",
-      maturity: "experiment",
+      maturity: "shipped",
       category: "Automation",
       stack: ["Node.js", "WebSockets", "X API", "Electron"],
       problem:
@@ -460,7 +461,7 @@ export const profile: Profile = {
       slug: "branksy",
       title: "Branksy — The Non-Artist",
       tagline: "A tongue-in-cheek 'degen coin' website for an artist who makes no art.",
-      maturity: "experiment",
+      maturity: "shipped",
       category: "Other",
       stack: ["HTML", "CSS", "JavaScript", "Firebase"],
       problem:

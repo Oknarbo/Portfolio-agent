@@ -13,6 +13,7 @@ export default function ProjectsPage() {
     .filter((p) => p.maturity === "production")
     .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
   const wip = projects.filter((p) => p.maturity === "wip");
+  const shipped = projects.filter((p) => p.maturity === "shipped");
   const experiments = projects.filter((p) => p.maturity === "experiment");
 
   return (
@@ -64,13 +65,29 @@ export default function ProjectsPage() {
         </section>
       ) : null}
 
+      {/* ── Other Shipped Products (complete, outside the core AI focus) ── */}
+      {shipped.length ? (
+        <section className="mt-20">
+          <CategoryHeader
+            title="Other Shipped Products"
+            tag="Completed"
+            subtitle="Finished, production-ready tools in blockchain and automation — solid work, but outside my core AI engineering focus."
+          />
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {shipped.map((p) => (
+              <CompactProjectCard key={p.slug} project={p} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       {/* ── 🔵 Experiments & Prototypes (explorations / PoCs) ──────── */}
       {experiments.length ? (
         <section className="mt-20">
           <CategoryHeader
             title="Experiments & Prototypes"
             tag="Exploration"
-            subtitle="Proofs of concept and reference work across AI, blockchain, and systems — not production systems."
+            subtitle="Proof-of-concept and exploration work — not production systems."
           />
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {experiments.map((p) => (
@@ -119,10 +136,20 @@ function StatusBadge({ project: p }: { project: Project }) {
       </span>
     );
   }
-  const label = p.maturity === "wip" ? "In development" : "Experiment";
+  const label =
+    p.maturity === "wip"
+      ? "In development"
+      : p.maturity === "shipped"
+        ? "Shipped"
+        : "Experiment";
+  // "shipped" gets a filled dot (complete); wip/experiment use a hollow dot.
+  const dot =
+    p.maturity === "shipped"
+      ? "h-1.5 w-1.5 rounded-full bg-[var(--color-subtle)]/70"
+      : "h-1.5 w-1.5 rounded-full ring-1 ring-[var(--color-subtle)]/60";
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-canvas)] px-2.5 py-0.5 text-[11px] font-semibold text-[var(--color-subtle)] ring-1 ring-inset ring-[var(--color-hairline)]/70">
-      <span className="h-1.5 w-1.5 rounded-full ring-1 ring-[var(--color-subtle)]/60" />
+      <span className={dot} />
       {label}
     </span>
   );
