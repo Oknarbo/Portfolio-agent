@@ -13,12 +13,22 @@ export function YouTubeEmbed({
   id,
   title,
   className = "",
+  active: activeProp,
+  onActivate,
 }: {
   id: string;
   title: string;
   className?: string;
+  /** Optional controlled mode: when provided, the parent owns play state. */
+  active?: boolean;
+  onActivate?: () => void;
 }) {
-  const [active, setActive] = useState(false);
+  const [activeState, setActiveState] = useState(false);
+  const active = activeProp ?? activeState;
+  const activate = () => {
+    setActiveState(true);
+    onActivate?.();
+  };
   const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 
   return (
@@ -37,7 +47,7 @@ export function YouTubeEmbed({
       ) : (
         <button
           type="button"
-          onClick={() => setActive(true)}
+          onClick={activate}
           aria-label={`Play video: ${title}`}
           className="group absolute inset-0 h-full w-full cursor-pointer"
         >

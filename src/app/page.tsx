@@ -1,27 +1,31 @@
 import { Container } from "@/components/Container";
 import { ButtonLink } from "@/components/Button";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
+import { FeaturedVideo } from "@/components/FeaturedVideo";
 import { profile } from "@/data/profile";
 
-const TRUST = [
-  "Commercially launched product",
-  "Python",
-  "MCP · tool-calling",
-  "Claude · Groq",
-  "FastAPI · WebSockets",
-  "Next.js · TypeScript",
+// Instant credibility layer — max 3 signals, shown directly under the hero.
+const CREDIBILITY = [
+  "1 production AI product shipped",
+  "Real-time LLM systems with API integrations",
+  "Active users in real-world workflows",
 ];
+
+const PROOF_ONELINER =
+  "Real-time AI system integrated into Ableton Live, used in production workflows.";
 
 export default function Home() {
   const { identity, capabilities, whyHire, transition, skills, projects } =
     profile;
   const featured = projects.find((p) => p.featured) ?? projects[0];
+  const primaryVideo = featured?.videos?.[0];
+  const secondaryVideos = featured?.videos?.slice(1) ?? [];
 
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
-        <Container className="flex flex-col items-center justify-center py-20 text-center sm:py-28">
+        <Container className="flex flex-col items-center justify-center py-16 text-center sm:py-24">
           <p className="animate-fade mb-5 text-[15px] font-medium text-[var(--color-subtle)]">
             {identity.title}
           </p>
@@ -43,104 +47,83 @@ export default function Home() {
               Open Career Assistant →
             </ButtonLink>
           </div>
-          <div
-            className="animate-fade mt-10 flex flex-wrap items-center justify-center gap-2"
+
+          {/* Instant credibility layer */}
+          <ul
+            className="animate-fade mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
             style={{ animationDelay: "0.24s" }}
           >
-            {TRUST.map((t) => (
-              <span
-                key={t}
-                className="rounded-full bg-[var(--color-surface)] px-3 py-1 text-[12.5px] font-medium text-[var(--color-subtle)] ring-1 ring-inset ring-[var(--color-hairline)]/70"
+            {CREDIBILITY.map((c) => (
+              <li
+                key={c}
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-surface)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--color-ink)] ring-1 ring-inset ring-[var(--color-hairline)]/70"
               >
-                {t}
-              </span>
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+                {c}
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 
-      {/* ── What I build ─────────────────────────────────────────── */}
-      <section className="py-12">
-        <Container>
-          <SectionHeader
-            eyebrow="What I build"
-            title="Services & technical capabilities"
-            subtitle="The kinds of systems I design and ship — end to end."
-          />
-          <div className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-[var(--color-hairline)]/70 bg-[var(--color-hairline)]/70 sm:grid-cols-2 lg:grid-cols-3">
-            {capabilities.map((c) => (
-              <div key={c.title} className="bg-[var(--color-surface)] p-6">
-                <h3 className="text-[15px] font-semibold tracking-tight">
-                  {c.title}
-                </h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-[var(--color-subtle)]">
-                  {c.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* ── Proof of work ────────────────────────────────────────── */}
+      {/* ── Proof of work (first evidence layer — video dominant) ─── */}
       {featured ? (
-        <section className="py-12">
+        <section className="pb-12 pt-4">
           <Container>
-            <SectionHeader
-              eyebrow="Proof of work"
-              title="Real systems, real implementations, real users."
-              subtitle="A commercially launched product you can watch in action below."
-            />
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-[13px] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+                Proof of work
+              </p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+                Real systems, real implementations, real users.
+              </h2>
+              <p className="mx-auto mt-3 max-w-xl text-[17px] leading-relaxed text-[var(--color-subtle)]">
+                {PROOF_ONELINER}
+              </p>
+            </div>
 
-            <article className="mt-10 overflow-hidden rounded-3xl border border-[var(--color-hairline)]/70 bg-[var(--color-surface)] shadow-[0_8px_40px_rgba(0,0,0,0.05)]">
-              <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-2">
-                {/* Videos */}
-                <div className="space-y-3">
-                  {featured.videos?.[0] ? (
-                    <YouTubeEmbed
-                      id={featured.videos[0].id}
-                      title={featured.videos[0].title}
-                    />
-                  ) : null}
-                  {featured.videos && featured.videos.length > 1 ? (
-                    <div className="grid grid-cols-2 gap-3">
-                      {featured.videos.slice(1).map((v) => (
-                        <YouTubeEmbed key={v.id} id={v.id} title={v.title} />
-                      ))}
-                    </div>
-                  ) : null}
+            {/* Dominant demo video + CTA */}
+            {primaryVideo ? (
+              <div className="mx-auto mt-8 max-w-3xl">
+                <FeaturedVideo
+                  id={primaryVideo.id}
+                  title={primaryVideo.title}
+                  cta="Watch 50s demo"
+                />
+              </div>
+            ) : null}
+
+            {/* Supporting evidence */}
+            <article className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl border border-[var(--color-hairline)]/70 bg-[var(--color-surface)] shadow-[0_8px_40px_rgba(0,0,0,0.05)]">
+              <div className="p-6 sm:p-8">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-[12px] font-semibold text-[var(--color-accent)]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+                    Commercially launched · v2.0.1
+                  </span>
+                  <span className="text-[12px] font-semibold uppercase tracking-wider text-[var(--color-subtle)]">
+                    {featured.category}
+                  </span>
                 </div>
-
-                {/* Summary */}
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-[12px] font-semibold text-[var(--color-accent)]">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-                      Commercially launched · v2.0.1
+                <h3 className="mt-3 text-2xl font-semibold tracking-tight">
+                  {featured.title}
+                </h3>
+                <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-[var(--color-subtle)]">
+                  {featured.tagline}
+                </p>
+                {featured.production?.note ? (
+                  <p className="mt-4 flex gap-2.5 rounded-xl bg-[var(--color-accent)]/[0.06] px-3.5 py-2.5 text-[14px] leading-relaxed text-[var(--color-ink)]">
+                    <span className="relative mt-1.5 flex h-2 w-2 flex-shrink-0">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-60" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
                     </span>
-                    <span className="text-[12px] font-semibold uppercase tracking-wider text-[var(--color-subtle)]">
-                      {featured.category}
-                    </span>
-                  </div>
-                  <h3 className="mt-3 text-2xl font-semibold tracking-tight">
-                    {featured.title}
-                  </h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-[var(--color-subtle)]">
-                    {featured.tagline}
+                    <span>{featured.production.note}</span>
                   </p>
+                ) : null}
 
-                  {featured.production?.note ? (
-                    <p className="mt-4 flex gap-2.5 rounded-xl bg-[var(--color-accent)]/[0.06] px-3.5 py-2.5 text-[14px] leading-relaxed text-[var(--color-ink)]">
-                      <span className="relative mt-1.5 flex h-2 w-2 flex-shrink-0">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-60" />
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
-                      </span>
-                      <span>{featured.production.note}</span>
-                    </p>
-                  ) : null}
-
+                <div className="mt-6 grid gap-8 lg:grid-cols-2">
                   {featured.challenges?.length ? (
-                    <ul className="mt-5 space-y-2">
+                    <ul className="space-y-2">
                       {featured.challenges.map((ch) => (
                         <li
                           key={ch}
@@ -153,36 +136,43 @@ export default function Home() {
                     </ul>
                   ) : null}
 
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {featured.stack.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full bg-[var(--color-canvas)] px-2.5 py-1 text-[12px] text-[var(--color-subtle)] ring-1 ring-inset ring-[var(--color-hairline)]/70"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  {featured.links?.length ? (
-                    <div className="mt-6 flex flex-wrap gap-4">
-                      {featured.links.map((l) => (
-                        <a
-                          key={l.url}
-                          href={l.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[14px] font-medium text-[var(--color-accent)] hover:underline"
-                        >
-                          {l.label} ↗
-                        </a>
+                  {secondaryVideos.length ? (
+                    <div className="grid grid-cols-2 gap-3 self-start">
+                      {secondaryVideos.map((v) => (
+                        <YouTubeEmbed key={v.id} id={v.id} title={v.title} />
                       ))}
                     </div>
                   ) : null}
                 </div>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {featured.stack.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full bg-[var(--color-canvas)] px-2.5 py-1 text-[12px] text-[var(--color-subtle)] ring-1 ring-inset ring-[var(--color-hairline)]/70"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {featured.links?.length ? (
+                  <div className="mt-6 flex flex-wrap gap-4">
+                    {featured.links.map((l) => (
+                      <a
+                        key={l.url}
+                        href={l.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[14px] font-medium text-[var(--color-accent)] hover:underline"
+                      >
+                        {l.label} ↗
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
               </div>
 
-              {/* Metrics */}
               {featured.metrics?.length ? (
                 <div className="grid grid-cols-2 gap-px border-t border-[var(--color-hairline)]/70 bg-[var(--color-hairline)]/70 sm:grid-cols-3 lg:grid-cols-6">
                   {featured.metrics.map((m) => (
@@ -210,6 +200,29 @@ export default function Home() {
           </Container>
         </section>
       ) : null}
+
+      {/* ── What I build (technical breakdown) ───────────────────── */}
+      <section className="py-12">
+        <Container>
+          <SectionHeader
+            eyebrow="What I build"
+            title="Services & technical capabilities"
+            subtitle="The kinds of systems I design and ship — end to end."
+          />
+          <div className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-[var(--color-hairline)]/70 bg-[var(--color-hairline)]/70 sm:grid-cols-2 lg:grid-cols-3">
+            {capabilities.map((c) => (
+              <div key={c.title} className="bg-[var(--color-surface)] p-6">
+                <h3 className="text-[15px] font-semibold tracking-tight">
+                  {c.title}
+                </h3>
+                <p className="mt-2 text-[14px] leading-relaxed text-[var(--color-subtle)]">
+                  {c.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
 
       {/* ── Why companies hire me ────────────────────────────────── */}
       <section className="py-12">
