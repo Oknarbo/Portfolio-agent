@@ -7,15 +7,17 @@ export const metadata = { title: "Projects" };
 export default function ProjectsPage() {
   const { projects } = profile;
 
-  // Production first, with the featured project leading; secondary work after.
+  // Maturity-based grouping. Production leads (featured first), then WIP,
+  // then experiments — each tier visually weaker than the one above it.
   const production = projects
-    .filter((p) => p.tier === "production")
+    .filter((p) => p.maturity === "production")
     .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
-  const other = projects.filter((p) => p.tier !== "production");
+  const wip = projects.filter((p) => p.maturity === "wip");
+  const experiments = projects.filter((p) => p.maturity === "experiment");
 
   return (
     <Container className="py-20">
-      <header className="mb-14 max-w-2xl">
+      <header className="mb-12 max-w-2xl">
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
           Projects
         </h1>
@@ -23,14 +25,20 @@ export default function ProjectsPage() {
           Selected case studies in AI systems, automation, and agents — each
           framed as Problem → Solution → Architecture → Outcome.
         </p>
+        {/* Project philosophy — maturity is explicit, not implied. */}
+        <p className="mt-6 border-l-2 border-[var(--color-accent)]/40 pl-4 text-[15px] italic leading-relaxed text-[var(--color-subtle)]">
+          I build a mix of production AI systems and experimental agent
+          prototypes. Only production-ready systems are shipped and maintained.
+        </p>
       </header>
 
-      {/* ── Production AI Systems (shipped / in real-world use) ───── */}
+      {/* ── 🟢 Production Systems (shipped & maintained) ───────────── */}
       {production.length ? (
         <section>
           <CategoryHeader
-            title="Production AI Systems"
-            subtitle="Shipped, real-world systems with actual users."
+            title="Production Systems"
+            tag="Shipped"
+            subtitle="Deployed, maintained AI systems with real users."
           />
           <div className="mt-8 space-y-8">
             {production.map((p) => (
@@ -40,16 +48,33 @@ export default function ProjectsPage() {
         </section>
       ) : null}
 
-      {/* ── Other Projects (side projects & experiments) ─────────── */}
-      {other.length ? (
+      {/* ── 🟡 Work in Progress (in development, not yet shipped) ──── */}
+      {wip.length ? (
         <section className="mt-20">
           <CategoryHeader
-            title="Other Projects"
-            subtitle="Side projects, experiments, and earlier work."
+            title="Work in Progress"
+            tag="In development"
+            subtitle="Actively built and evolving — not yet shipped as products."
           />
           <div className="mt-8 space-y-8">
-            {other.map((p) => (
+            {wip.map((p) => (
               <ProjectCard key={p.slug} project={p} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* ── 🔵 Experiments & Prototypes (explorations / PoCs) ──────── */}
+      {experiments.length ? (
+        <section className="mt-20">
+          <CategoryHeader
+            title="Experiments & Prototypes"
+            tag="Exploration"
+            subtitle="Proofs of concept and reference work across AI, blockchain, and systems — not production systems."
+          />
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {experiments.map((p) => (
+              <CompactProjectCard key={p.slug} project={p} />
             ))}
           </div>
         </section>
@@ -60,18 +85,89 @@ export default function ProjectsPage() {
 
 function CategoryHeader({
   title,
+  tag,
   subtitle,
 }: {
   title: string;
+  tag: string;
   subtitle: string;
 }) {
   return (
     <div className="border-b border-[var(--color-hairline)]/70 pb-4">
-      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-        {title}
-      </h2>
+      <div className="flex flex-wrap items-center gap-3">
+        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+          {title}
+        </h2>
+        <span className="rounded-full bg-[var(--color-canvas)] px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--color-subtle)] ring-1 ring-inset ring-[var(--color-hairline)]/70">
+          {tag}
+        </span>
+      </div>
       <p className="mt-1.5 text-[15px] text-[var(--color-subtle)]">{subtitle}</p>
     </div>
+  );
+}
+
+// Maturity-aware status pill. Production uses the accent color; WIP and
+// experiments stay neutral so they read as lower in the hierarchy.
+function StatusBadge({ project: p }: { project: Project }) {
+  if (p.maturity === "production") {
+    const label = p.featured ? "Commercially launched" : "Production · Live";
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)]/10 px-2.5 py-0.5 text-[11px] font-semibold text-[var(--color-accent)]">
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+        {label}
+      </span>
+    );
+  }
+  const label = p.maturity === "wip" ? "In development" : "Experiment";
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-canvas)] px-2.5 py-0.5 text-[11px] font-semibold text-[var(--color-subtle)] ring-1 ring-inset ring-[var(--color-hairline)]/70">
+      <span className="h-1.5 w-1.5 rounded-full ring-1 ring-[var(--color-subtle)]/60" />
+      {label}
+    </span>
+  );
+}
+
+// Condensed card for experiments — deliberately low visual weight.
+function CompactProjectCard({ project: p }: { project: Project }) {
+  return (
+    <article className="flex h-full flex-col rounded-2xl border border-[var(--color-hairline)]/60 bg-[var(--color-surface)]/70 p-6 transition-shadow hover:shadow-[0_6px_30px_rgba(0,0,0,0.05)]">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-subtle)]">
+          {p.category}
+        </span>
+        <StatusBadge project={p} />
+      </div>
+      <h3 className="mt-2 text-lg font-semibold tracking-tight">{p.title}</h3>
+      <p className="mt-1.5 text-[14px] leading-relaxed text-[var(--color-subtle)]">
+        {p.tagline}
+      </p>
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {p.stack.slice(0, 5).map((t) => (
+          <span
+            key={t}
+            className="rounded-full bg-[var(--color-canvas)] px-2 py-0.5 text-[11px] text-[var(--color-subtle)] ring-1 ring-inset ring-[var(--color-hairline)]/70"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+      {p.links?.length ? (
+        <div className="mt-auto flex flex-wrap gap-3 pt-4">
+          {p.links.map((l) => (
+            <a
+              key={l.url}
+              href={l.url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-[13px] font-medium text-[var(--color-accent)] hover:underline"
+            >
+              {l.label} ↗
+            </a>
+          ))}
+        </div>
+      ) : null}
+    </article>
   );
 }
 
@@ -100,12 +196,7 @@ function ProjectCard({
               <span className="text-[12px] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
                 {p.category}
               </span>
-              {p.featured ? (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)]/10 px-2.5 py-0.5 text-[11px] font-semibold text-[var(--color-accent)]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-                  Commercially launched
-                </span>
-              ) : null}
+              <StatusBadge project={p} />
             </div>
             <h2
               className={

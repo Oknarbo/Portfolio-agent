@@ -49,9 +49,11 @@ export type Project = {
   slug: string;
   title: string;
   tagline: string;
-  // "production" = shipped / real-world / in-use AI systems.
-  // "other" = side projects, experiments, or secondary work.
-  tier: "production" | "other";
+  // Maturity / delivery classification:
+  // "production" = shipped, deployed, and maintained systems.
+  // "wip"        = actively in development, not yet shipped.
+  // "experiment" = proof-of-concept, exploration, or reference work.
+  maturity: "production" | "wip" | "experiment";
   category: "AI" | "Automation" | "Blockchain" | "Agent Systems" | "Other";
   stack: string[];
   problem: string;
@@ -269,7 +271,7 @@ export const profile: Profile = {
       title: "Profesor Abelton — AI Copilot for Ableton Live",
       tagline:
         "A standalone desktop AI that turns natural language into Ableton Live actions — built to feel like a friend who actually knows Ableton.",
-      tier: "production",
+      maturity: "production",
       category: "Agent Systems",
       stack: ["Python", "MCP", "Claude", "Groq", "WebSockets", "Fernet", "PyInstaller"],
       problem:
@@ -325,7 +327,7 @@ export const profile: Profile = {
       slug: "career-assistant",
       title: "AI Career Assistant (this site)",
       tagline: "A grounded RAG assistant that answers recruiter questions about my work.",
-      tier: "production",
+      maturity: "production",
       category: "AI",
       stack: ["Next.js", "TypeScript", "OpenAI", "Supabase", "pgvector"],
       problem:
@@ -349,7 +351,7 @@ export const profile: Profile = {
       slug: "profesor-david",
       title: "Profesor David — AI Companion for Avid Pro Tools",
       tagline: "The Profesor Abelton architecture, adapted for Pro Tools and xAI Grok.",
-      tier: "other",
+      maturity: "wip",
       category: "Agent Systems",
       stack: ["Python", "FastAPI", "xAI Grok", "PTSL (gRPC)", "Tkinter"],
       problem:
@@ -371,7 +373,7 @@ export const profile: Profile = {
       slug: "profesorica-volca",
       title: "Profesorica Volca — AI Tutor for Korg Volca Hardware",
       tagline: "Extending the agentic copilot concept from software to hardware synthesizers.",
-      tier: "other",
+      maturity: "wip",
       category: "Agent Systems",
       stack: ["Python", "PySide6", "OpenAI", "Anthropic"],
       problem:
@@ -393,7 +395,7 @@ export const profile: Profile = {
       slug: "solana-automation",
       title: "Solana Automation Tools",
       tagline: "A suite of Python tools for the Solana ecosystem: trading, tokens, and real-time events.",
-      tier: "other",
+      maturity: "experiment",
       category: "Blockchain",
       stack: ["Python", "Solana", "SPL", "WebSockets", "REST APIs"],
       problem:
@@ -413,7 +415,7 @@ export const profile: Profile = {
       slug: "forex-automation",
       title: "Forex Automation System",
       tagline: "Automated trading and risk-management tooling in C#.",
-      tier: "other",
+      maturity: "experiment",
       category: "Automation",
       stack: ["C#", "cTrader / cAlgo"],
       problem:
@@ -427,7 +429,7 @@ export const profile: Profile = {
       slug: "x-trending-monitor",
       title: "X Trending Monitor",
       tagline: "A live dashboard for the top 30 trending topics on X (Twitter).",
-      tier: "other",
+      maturity: "experiment",
       category: "Automation",
       stack: ["Node.js", "WebSockets", "X API", "Electron"],
       problem:
@@ -441,7 +443,7 @@ export const profile: Profile = {
       slug: "unimatrix",
       title: "Unimatrix — Modular Synthesizer (Rust)",
       tagline: "A real-time modular synthesizer engine built in Rust. In active development.",
-      tier: "other",
+      maturity: "experiment",
       category: "Other",
       stack: ["Rust", "CPAL", "midir", "rodio"],
       problem:
@@ -458,7 +460,7 @@ export const profile: Profile = {
       slug: "branksy",
       title: "Branksy — The Non-Artist",
       tagline: "A tongue-in-cheek 'degen coin' website for an artist who makes no art.",
-      tier: "other",
+      maturity: "experiment",
       category: "Other",
       stack: ["HTML", "CSS", "JavaScript", "Firebase"],
       problem:
