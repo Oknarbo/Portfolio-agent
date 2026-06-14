@@ -33,6 +33,10 @@ export type TimelineItem = {
   stack: string[];
 };
 
+export type Video = { id: string; title: string };
+
+export type Metric = { value: string; label: string };
+
 export type Project = {
   slug: string;
   title: string;
@@ -42,6 +46,12 @@ export type Project = {
   problem: string;
   solution: string;
   impact: string;
+  architecture?: string;
+  challenges?: string[];
+  outcome?: string;
+  videos?: Video[];
+  metrics?: Metric[];
+  featured?: boolean;
   links?: { label: string; url: string }[];
 };
 
@@ -49,6 +59,10 @@ export type SkillGroup = {
   group: string;
   items: string[];
 };
+
+export type Capability = { title: string; description: string };
+
+export type WhyHire = { title: string; detail: string };
 
 export type GithubSummary = {
   repo: string;
@@ -60,6 +74,9 @@ export type GithubSummary = {
 export type Profile = {
   identity: Identity;
   summary: string; // longer professional summary used on /about and in RAG
+  capabilities: Capability[]; // "What I build" — services / technical capabilities
+  whyHire: WhyHire[]; // "Why companies hire me"
+  transition: string[]; // "Why I switched careers" — concise bullets
   timeline: TimelineItem[];
   projects: Project[];
   skills: SkillGroup[];
@@ -77,7 +94,7 @@ export const profile: Profile = {
     name: "Branimir Antičević",
     title: "AI Engineer · Agentic AI & LLM Applications",
     positioning:
-      "I build production-grade agentic AI systems — from Profesor Abelton, a commercially launched AI copilot for Ableton Live, to autonomous automation tooling. Self-taught, shipped, and real.",
+      "I design and ship agentic AI systems and LLM tools — including Profesor Abelton, a commercially launched AI copilot for Ableton Live. Self-taught, shipped, and in production.",
     location: "Zagreb, Croatia",
     email: "branimir.anticevic@gmail.com",
     github: "https://github.com/Oknarbo",
@@ -90,7 +107,95 @@ export const profile: Profile = {
   },
 
   summary:
-    "I didn't start my career in software. After years in journalism, digital marketing, and customer-facing roles, I taught myself Python, agentic workflows, LLM systems, real-time integrations, and production AI development while working full-time. That journey led to Profesor Abelton — a commercially launched AI copilot for Ableton Live that I designed and built from scratch, combining a custom Model Context Protocol (MCP) with 35 schema-validated tools, a dual-LLM architecture (Claude + Groq), real-time session awareness, production security controls, licensing infrastructure, and automated onboarding. Today I focus on building practical, production-grade AI systems that solve real-world problems through intelligent automation, agentic workflows, and seamless software integration.",
+    "I didn't start my career in software. After years in journalism, digital marketing, and customer-facing roles, I taught myself Python, agentic workflows, LLM systems, real-time integrations, and production AI development while working full-time. That journey led to Profesor Abelton — a commercially launched AI copilot for Ableton Live that I designed and built from scratch, combining a custom Model Context Protocol (MCP) with 35 schema-validated tools, a dual-LLM architecture (Claude + Groq), real-time session awareness, production security controls, licensing infrastructure, and automated onboarding. Today I build practical AI systems that solve real problems through agentic workflows, tool-calling, and software integration.",
+
+  capabilities: [
+    {
+      title: "AI Agents",
+      description:
+        "Agents that read live state, reason over it, and take actions through validated tools.",
+    },
+    {
+      title: "Agentic Workflows",
+      description:
+        "Multi-step LLM workflows with tool-calling, guardrails, and deterministic fallbacks.",
+    },
+    {
+      title: "MCP Integrations",
+      description:
+        "Custom Model Context Protocol servers exposing schema-validated tools to LLMs.",
+    },
+    {
+      title: "RAG Systems",
+      description:
+        "Retrieval-augmented assistants grounded strictly in your data — like the one on this site.",
+    },
+    {
+      title: "API Integrations",
+      description:
+        "Real-time integrations with local and third-party APIs over REST and WebSockets.",
+    },
+    {
+      title: "Full-Stack AI Apps",
+      description:
+        "Next.js + TypeScript front ends backed by Python AI services.",
+    },
+    {
+      title: "Python Backends",
+      description:
+        "Async Python services with FastAPI, WebSockets, and careful error handling.",
+    },
+    {
+      title: "Workflow Automation",
+      description:
+        "Python automation for trading, on-chain workflows, and data pipelines.",
+    },
+    {
+      title: "LLM-Powered Tools",
+      description:
+        "Desktop and web tools built on Claude, Groq, OpenAI, and xAI Grok.",
+    },
+  ],
+
+  whyHire: [
+    {
+      title: "Ships from minimal specs",
+      detail:
+        "Comfortable turning a one-line brief or rough idea into a working, shipped product.",
+    },
+    {
+      title: "Production-minded",
+      detail:
+        "Licensing, encryption, command allowlists, and security reviews — not just demos.",
+    },
+    {
+      title: "Fast implementation",
+      detail:
+        "Solo-designed, built, and commercially launched a full AI product end to end.",
+    },
+    {
+      title: "Business-first thinking",
+      detail:
+        "Years in media and marketing mean I build for outcomes, not just clean code.",
+    },
+    {
+      title: "Clear communication",
+      detail:
+        "I bridge technical and non-technical stakeholders in plain language.",
+    },
+    {
+      title: "Remote-ready & bilingual",
+      detail:
+        "Native Croatian, professional English, experienced working independently.",
+    },
+  ],
+
+  transition: [
+    "16 years as a journalist and editor across Croatian print, radio, TV, and online media.",
+    "Moved into digital marketing — closer to products, data, and the web.",
+    "Got obsessed with AI and automation, and taught myself Python while working full-time.",
+    "Designed, built, and commercially launched Profesor Abelton — a real, shipped AI product.",
+  ],
 
   timeline: [
     {
@@ -160,6 +265,30 @@ export const profile: Profile = {
         "A local desktop copilot connected to Ableton via an official Control Surface Remote Script. It streams full session state (tracks, clips, devices, tempo) to a dual-LLM engine (Claude with a custom MCP of 35 schema-validated tools, plus Groq for sub-second responses). A hardened command pipeline enforces a 40-action allowlist, parameter sanitization, and a 12-command batch limit. A 5-step First Launch Wizard auto-installs the Remote Script, encrypts API keys (Fernet), and activates a machine-bound Gumroad license.",
       impact:
         "Commercially launched (v2.0.1) and distributed via Gumroad for Windows and macOS. Passed independent AI security reviews (88/100 GPT-4o, 80/100 Grok) and Bandit static analysis with zero medium/high findings.",
+      architecture:
+        "A desktop app (PyInstaller) talks to a local FastAPI + WebSocket engine, which connects to Ableton through an official Control Surface Remote Script. A dual-LLM router sends complex reasoning to Claude — over a custom MCP of 35 schema-validated tools — and quick queries to Groq for sub-second responses. Every requested action passes a hardened command pipeline before it ever reaches Ableton.",
+      challenges: [
+        "Streaming full Ableton session state (tracks, clips, devices, tempo) in real time without blocking the UI.",
+        "Designing 35 schema-validated MCP tools so the LLM can act safely and predictably.",
+        "Hardening the command pipeline: a 40-action allowlist, parameter sanitization, and a 12-command batch limit.",
+        "Making it a real product: Fernet-encrypted API keys, machine-bound Gumroad licensing, and a 5-step first-launch wizard.",
+      ],
+      outcome:
+        "A commercially launched (v2.0.1) desktop product on Windows and macOS that passed independent AI security reviews (88/100 GPT-4o, 80/100 Grok) and Bandit static analysis with zero medium/high findings.",
+      metrics: [
+        { value: "v2.0.1", label: "Commercially launched" },
+        { value: "35", label: "Schema-validated MCP tools" },
+        { value: "2 LLMs", label: "Claude + Groq routing" },
+        { value: "88/100", label: "Independent AI security review" },
+        { value: "Win + macOS", label: "Distributed via Gumroad" },
+        { value: "0", label: "Bandit medium/high findings" },
+      ],
+      videos: [
+        { id: "m0WbmGFnUec", title: "Analyse my session" },
+        { id: "iqlSgbPJB8M", title: "Add a MIDI track" },
+        { id: "0SQJ4q6kbPQ", title: "How do I add a device?" },
+      ],
+      featured: true,
       links: [
         { label: "Gumroad", url: "https://oknarbo.gumroad.com/l/nyhfbr" },
         { label: "GitHub", url: "https://github.com/Oknarbo/profesor-abelton-ai" },
@@ -177,6 +306,15 @@ export const profile: Profile = {
         "A retrieval-augmented assistant grounded strictly in my profile data: questions are embedded, relevant chunks are retrieved via vector search, and the LLM answers only from that context. A dedicated Job Fit mode analyzes a pasted job description and returns a fit score, experience mapping, gaps, and interview positioning.",
       impact:
         "Turns a static portfolio into an interactive, queryable career interface — and demonstrates real AI systems engineering (RAG, embeddings, grounding).",
+      architecture:
+        "Next.js 15 App Router (TypeScript) with an API route that streams responses token by token. A provider-agnostic layer routes chat to Claude, Groq, or OpenAI; a retrieval layer either passes the full profile as context or runs vector search. Per-IP and global rate limits cap abuse and cost.",
+      challenges: [
+        "Keeping answers strictly grounded so the assistant never invents experience.",
+        "Streaming responses while rendering Markdown (tables, lists) incrementally.",
+        "Staying provider-agnostic so it runs on Claude, Groq, or OpenAI without code changes.",
+      ],
+      outcome:
+        "A live, queryable career interface with a Q&A mode and a Job Fit mode that scores a pasted job description against real profile data.",
       links: [{ label: "GitHub", url: "https://github.com/Oknarbo" }],
     },
     {
@@ -191,6 +329,14 @@ export const profile: Profile = {
         "A local AI companion using a FastAPI server (127.0.0.1:8766) and the Pro Tools PTSL gRPC connector, powered by the xAI Grok API. It receives live session state and answers conversationally, reusing the proven Profesor Abelton architecture.",
       impact:
         "Working v1.0.0 (read-only), demonstrating the MCP/session-aware architecture generalizes across professional audio software. Write actions (inserts, plugin params, transport) planned next.",
+      architecture:
+        "A local FastAPI server (127.0.0.1:8766) bridges the Pro Tools PTSL gRPC connector and the xAI Grok API, reusing the session-aware pattern proven in Profesor Abelton.",
+      challenges: [
+        "Adapting the MCP/session-aware architecture to a different DAW and a different LLM provider (xAI Grok).",
+        "Speaking Pro Tools' PTSL gRPC protocol to read live session state.",
+      ],
+      outcome:
+        "Working v1.0.0 (read-only); write actions (inserts, plugin params, transport) are the next milestone.",
     },
     {
       slug: "profesorica-volca",
@@ -204,6 +350,14 @@ export const profile: Profile = {
         "A desktop tutor for Volca Bass, Drum, and Sample with original vector panel renderers driven by JSON control maps and glow highlighting. It offers a deterministic recipe mode (no LLM) and an LLM-backed chat/explain mode bound by a strict JSON schema contract.",
       impact:
         "MVP demonstrating the agentic-tutor pattern applied to physical hardware via structured, schema-validated outputs.",
+      architecture:
+        "A PySide6 desktop tutor with original vector panel renderers driven by JSON control maps. A deterministic recipe mode needs no LLM; an LLM-backed chat/explain mode is bound by a strict JSON schema contract.",
+      challenges: [
+        "Rendering accurate, interactive hardware panels from JSON control maps.",
+        "Constraining LLM output to a strict JSON schema so explanations map to real controls.",
+      ],
+      outcome:
+        "An MVP showing the agentic-tutor pattern works for physical hardware via structured outputs.",
     },
     {
       slug: "solana-automation",

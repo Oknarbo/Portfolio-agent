@@ -13,14 +13,50 @@ export type SourceDocument = {
  */
 export function buildDocuments(): SourceDocument[] {
   const docs: SourceDocument[] = [];
-  const { identity, summary, timeline, projects, skills, github, education, languages } =
-    profile;
+  const {
+    identity,
+    summary,
+    capabilities,
+    whyHire,
+    transition,
+    timeline,
+    projects,
+    skills,
+    github,
+    education,
+    languages,
+  } = profile;
 
   docs.push({
     id: "about-summary",
     source: "about",
     title: "Professional summary",
     content: `${identity.name} — ${identity.title}, based in ${identity.location}. ${summary} Positioning: ${identity.positioning}`,
+  });
+
+  docs.push({
+    id: "capabilities",
+    source: "skills",
+    title: "What I build (services and capabilities)",
+    content: `Services and technical capabilities: ${capabilities
+      .map((c) => `${c.title} — ${c.description}`)
+      .join(" ")}`,
+  });
+
+  docs.push({
+    id: "why-hire",
+    source: "about",
+    title: "Why companies hire me",
+    content: `Reasons companies hire ${identity.name}: ${whyHire
+      .map((w) => `${w.title} — ${w.detail}`)
+      .join(" ")}`,
+  });
+
+  docs.push({
+    id: "career-transition",
+    source: "about",
+    title: "Career transition story",
+    content: `How ${identity.name} switched into AI engineering: ${transition.join(" ")}`,
   });
 
   docs.push({
@@ -40,11 +76,20 @@ export function buildDocuments(): SourceDocument[] {
   });
 
   projects.forEach((p) => {
+    const extra = [
+      p.architecture ? `Architecture: ${p.architecture}` : "",
+      p.challenges?.length
+        ? `Engineering challenges: ${p.challenges.join("; ")}.`
+        : "",
+      p.outcome ? `Outcome: ${p.outcome}` : "",
+    ]
+      .filter(Boolean)
+      .join(" ");
     docs.push({
       id: `project-${p.slug}`,
       source: "project",
       title: p.title,
-      content: `Project: ${p.title} (${p.category}). ${p.tagline} Problem: ${p.problem} Solution: ${p.solution} Impact: ${p.impact} Tech stack: ${p.stack.join(", ")}.`,
+      content: `Project: ${p.title} (${p.category}). ${p.tagline} Problem: ${p.problem} Solution: ${p.solution} Impact: ${p.impact} ${extra} Tech stack: ${p.stack.join(", ")}.`,
     });
   });
 
