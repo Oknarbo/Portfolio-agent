@@ -112,7 +112,7 @@ export const profile: Profile = {
     positioning:
       "AI Engineer who designed, built, and commercially shipped a production-grade AI product with real users.",
     location: "Zagreb, Croatia",
-    email: "branimir.anticevic@gmail.com",
+    email: "connect@branx.dev",
     github: "https://github.com/Oknarbo",
     linkedin: "https://www.linkedin.com/in/branimir-anticevic/",
     website: "",
