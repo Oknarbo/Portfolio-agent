@@ -4,7 +4,13 @@ export function Footer() {
   const { identity } = profile;
   return (
     <footer className="mt-24 border-t border-[var(--color-hairline)]/60">
-      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-6 py-8 text-[13px] text-[var(--color-subtle)] sm:flex-row">
+      <div className="mx-auto max-w-5xl px-6 pt-8">
+        <p className="text-center text-[13px] font-medium text-[var(--color-ink)] sm:text-left">
+          Available for remote roles and freelance contracts · EU citizen ·
+          English C1
+        </p>
+      </div>
+      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-6 pb-8 pt-4 text-[13px] text-[var(--color-subtle)] sm:flex-row">
         <p>
           © {new Date().getFullYear()} {identity.name}. All rights reserved.
         </p>

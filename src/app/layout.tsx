@@ -6,7 +6,8 @@ import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: `${profile.identity.name} — ${profile.identity.title}`,
-  description: profile.identity.positioning,
+  description:
+    "AI Engineer who commercially shipped a production agentic app with real users. MCP, Claude API, Python, agentic workflows. Open to remote AI engineering roles.",
 };
 
 export default function RootLayout({

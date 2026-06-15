@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container } from "@/components/Container";
 import { ButtonLink, ButtonAnchor } from "@/components/Button";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
@@ -6,7 +7,7 @@ import { profile } from "@/data/profile";
 
 // Proof line — concrete, verifiable signals shown directly under the subheadline.
 const PROOF_SIGNALS = [
-  "~14 early production users",
+  "Commercially launched — real paying users in production workflows.",
   "35+ schema-validated tools",
   "End-to-end delivery with security & licensing",
 ];
@@ -24,8 +25,7 @@ const AVAILABILITY = [
 ];
 
 export default function Home() {
-  const { identity, capabilities, whyHire, transition, skills, projects } =
-    profile;
+  const { identity, capabilities, whyHire, skills, projects } = profile;
   const featured = projects.find((p) => p.featured) ?? projects[0];
   const primaryVideo = featured?.videos?.[0];
   const secondaryVideos = featured?.videos?.slice(1) ?? [];
@@ -73,6 +73,25 @@ export default function Home() {
               Open Career Assistant →
             </ButtonLink>
           </div>
+
+          {/* Inline assistant CTA — make the grounded assistant discoverable */}
+          <Link
+            href="/assistant"
+            className="animate-fade group mt-8 inline-flex items-center gap-2.5 rounded-full border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/[0.06] py-2.5 pl-3.5 pr-4 text-[14px] font-medium text-[var(--color-ink)] transition-colors hover:bg-[var(--color-accent)]/[0.12]"
+            style={{ animationDelay: "0.32s" }}
+          >
+            <svg
+              viewBox="0 0 20 20"
+              className="h-4 w-4 flex-shrink-0 fill-[var(--color-accent)]"
+              aria-hidden="true"
+            >
+              <path d="M10 2.5c-4.4 0-8 2.9-8 6.5 0 1.9 1 3.6 2.6 4.8-.1.9-.5 1.9-1.2 2.7 1.4-.2 2.7-.7 3.7-1.4.9.3 1.9.4 2.9.4 4.4 0 8-2.9 8-6.5S14.4 2.5 10 2.5Z" />
+            </svg>
+            <span>Got recruiter questions? Ask my AI assistant</span>
+            <span className="text-[var(--color-accent)] transition-transform group-hover:translate-x-0.5">
+              →
+            </span>
+          </Link>
         </Container>
       </section>
 
@@ -200,6 +219,12 @@ export default function Home() {
                   ))}
                 </div>
               ) : null}
+
+              {featured.metricsFootnote ? (
+                <p className="border-t border-[var(--color-hairline)]/70 bg-[var(--color-surface)] px-6 py-3 text-[12px] leading-relaxed text-[var(--color-subtle)]">
+                  {featured.metricsFootnote}
+                </p>
+              ) : null}
             </article>
 
           </Container>
@@ -303,32 +328,21 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ── Why I switched careers ───────────────────────────────── */}
+      {/* ── Career transition (condensed — full story on /about) ──── */}
       <section className="py-12">
         <Container>
-          <div className="rounded-3xl border border-[var(--color-hairline)]/70 bg-[var(--color-surface)] p-8 sm:p-12">
-            <SectionHeader
-              eyebrow="Why I switched careers"
-              title="From newsroom to shipped AI products."
-            />
-            <ol className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {transition.map((step, i) => (
-                <li key={i} className="relative">
-                  <span className="text-[13px] font-semibold text-[var(--color-accent)]">
-                    0{i + 1}
-                  </span>
-                  <p className="mt-2 text-[14px] leading-relaxed text-[var(--color-ink)]">
-                    {step}
-                  </p>
-                </li>
-              ))}
-            </ol>
-            <div className="mt-8">
-              <ButtonLink href="/about" variant="secondary">
-                Read the full story →
-              </ButtonLink>
-            </div>
-          </div>
+          <Link
+            href="/about"
+            className="group flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-[17px] font-medium text-[var(--color-ink)]"
+          >
+            <span>From newsroom to shipped AI product</span>
+            <span className="text-[var(--color-accent)]">
+              — read the full story{" "}
+              <span className="inline-block transition-transform group-hover:translate-x-0.5">
+                →
+              </span>
+            </span>
+          </Link>
         </Container>
       </section>
 

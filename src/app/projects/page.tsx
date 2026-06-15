@@ -22,7 +22,12 @@ export default function ProjectsPage() {
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
           Projects
         </h1>
-        <p className="mt-4 text-lg text-[var(--color-subtle)]">
+        {/* What I can build for you — value proposition up front. */}
+        <p className="mt-4 text-lg leading-relaxed text-[var(--color-ink)]">
+          One commercially shipped product. Here&apos;s what it took — and what
+          I can replicate for your stack.
+        </p>
+        <p className="mt-3 text-[15px] text-[var(--color-subtle)]">
           Selected case studies in AI systems, automation, and agents — each
           framed as Problem → Solution → Architecture → Outcome.
         </p>
@@ -377,6 +382,12 @@ function ProjectCard({
             </div>
           ))}
         </div>
+      ) : null}
+
+      {p.metricsFootnote ? (
+        <p className="border-t border-[var(--color-hairline)]/70 bg-[var(--color-surface)] px-6 py-3 text-[12px] leading-relaxed text-[var(--color-subtle)]">
+          {p.metricsFootnote}
+        </p>
       ) : null}
     </article>
   );

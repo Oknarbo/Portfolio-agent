@@ -66,6 +66,7 @@ export type Project = {
   production?: ProductionImpact;
   videos?: Video[];
   metrics?: Metric[];
+  metricsFootnote?: string; // attribution / clarification for the metrics above
   featured?: boolean;
   links?: { label: string; url: string }[];
 };
@@ -176,7 +177,7 @@ export const profile: Profile = {
     {
       title: "One commercially launched AI product in production",
       detail:
-        "Designed, built, and shipped Profesor Abelton — a desktop AI copilot for Ableton Live with ~14 early paying users. Includes 35+ schema-validated tools, real-time session streaming, encryption, command allowlists, and commercial licensing.",
+        "Designed, built, and shipped Profesor Abelton — a desktop AI copilot for Ableton Live, commercially launched with real paying users in production workflows. Includes 35+ schema-validated tools, real-time session streaming, encryption, command allowlists, and commercial licensing.",
     },
     {
       title: "Production-grade, not demo-grade",
@@ -192,6 +193,11 @@ export const profile: Profile = {
       title: "Understands both sides of the table",
       detail:
         "16 years in journalism and marketing before switching to AI. I build for business outcomes, not just technical elegance, and can communicate clearly with both engineers and non-technical stakeholders.",
+    },
+    {
+      title: "Communicates like an engineer, thinks like a product person",
+      detail:
+        "16 years writing for audiences means clear async communication, precise documentation, and the ability to translate technical decisions for non-technical stakeholders. No hand-holding required.",
     },
     {
       title: "Remote-first and independent",
@@ -224,14 +230,14 @@ export const profile: Profile = {
     },
     {
       period: "Nov 2022 — Jul 2025",
-      role: "Customer Service Representative (self-directed transition into software)",
+      role: "Full-time Employment (self-directed AI transition)",
       company: "McDonald's",
       summary:
-        "Worked a full-time customer-facing role while teaching myself Python, agentic systems, and production AI development.",
+        "Taught myself Python, agentic systems, and production AI development while working a full-time customer-facing role.",
       highlights: [
         "Self-taught Python, LLM systems, and agentic workflows while working full-time.",
         "Built first real AI products during this period, transitioning into software development.",
-        "Later designed an AI onboarding assistant concept grounded in real operational experience.",
+        "Held a full-time customer-facing role; later designed an AI onboarding assistant concept grounded in that real operational experience.",
       ],
       stack: ["Python", "Self-directed learning"],
     },
@@ -287,7 +293,7 @@ export const profile: Profile = {
       outcome:
         "A commercially launched (v2.0.1) desktop product on Windows and macOS that passed independent AI security reviews (88/100 GPT-4o, 80/100 Grok) and Bandit static analysis with zero medium/high findings.",
       production: {
-        note: "Small but real: ~14 early production users — music producers running it inside their day-to-day Ableton Live sessions.",
+        note: "Shipped to paying users in less than 3 months from first line of code — music producers running it inside their day-to-day Ableton Live sessions.",
         usage:
           "The users are music producers who keep Profesor Abelton open next to Ableton Live while they work. Instead of pausing to search forums or watch tutorials, they ask it in plain language — \u201Cadd a MIDI track\u201D, \u201Chow do I add a device\u201D, \u201Canalyse my session\u201D — and it reads the live session state and either answers or performs the action directly in the project. The assistant sits inside the creative loop rather than in a separate tab.",
         impactSignals: [
@@ -308,6 +314,8 @@ export const profile: Profile = {
         { value: "Win + macOS", label: "Distributed via Gumroad" },
         { value: "0", label: "Bandit medium/high findings" },
       ],
+      metricsFootnote:
+        "Security review scores via independent GPT-4o (88/100) and Grok (80/100) assessments, plus Bandit static analysis (zero medium/high findings).",
       videos: [
         { id: "m0WbmGFnUec", title: "Analyse my session" },
         { id: "iqlSgbPJB8M", title: "Add a MIDI track" },
