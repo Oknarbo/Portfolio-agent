@@ -109,7 +109,7 @@ export const profile: Profile = {
     name: "Branimir Antičević",
     title: "AI Engineer · Agentic AI & LLM Applications",
     positioning:
-      "I design and ship agentic AI systems and LLM tools — including Profesor Abelton, a commercially launched AI copilot for Ableton Live. Self-taught, shipped, and in production.",
+      "AI Engineer who designed, built, and commercially shipped a production-grade AI product with real users.",
     location: "Zagreb, Croatia",
     email: "branimir.anticevic@gmail.com",
     github: "https://github.com/Oknarbo",
@@ -174,34 +174,29 @@ export const profile: Profile = {
 
   whyHire: [
     {
-      title: "Ships from minimal specs",
+      title: "One commercially launched AI product in production",
       detail:
-        "Comfortable turning a one-line brief or rough idea into a working, shipped product.",
+        "Designed, built, and shipped Profesor Abelton — a desktop AI copilot for Ableton Live with ~14 early paying users. Includes 35+ schema-validated tools, real-time session streaming, encryption, command allowlists, and commercial licensing.",
     },
     {
-      title: "Production-minded",
+      title: "Production-grade, not demo-grade",
       detail:
-        "Licensing, encryption, command allowlists, and security reviews — not just demos.",
+        "Security reviews, encrypted API keys, machine-bound licensing, parameter sanitization, and strict command guardrails were part of the first release — not added later.",
     },
     {
-      title: "Fast implementation",
+      title: "Ships from vague to working",
       detail:
-        "Solo-designed, built, and commercially launched a full AI product end to end.",
+        "Comfortable taking a rough idea or one-line brief and turning it into a usable product with real users. Solo end-to-end delivery (architecture, implementation, security, distribution).",
     },
     {
-      title: "Business-first thinking",
+      title: "Understands both sides of the table",
       detail:
-        "Years in media and marketing mean I build for outcomes, not just clean code.",
+        "16 years in journalism and marketing before switching to AI. I build for business outcomes, not just technical elegance, and can communicate clearly with both engineers and non-technical stakeholders.",
     },
     {
-      title: "Clear communication",
+      title: "Remote-first and independent",
       detail:
-        "I bridge technical and non-technical stakeholders in plain language.",
-    },
-    {
-      title: "Remote-ready & bilingual",
-      detail:
-        "Native Croatian, professional English, experienced working independently.",
+        "Native Croatian, professional English. Experienced working solo with full ownership of a commercial product.",
     },
   ],
 

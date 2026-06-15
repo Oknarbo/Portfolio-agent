@@ -4,11 +4,11 @@ import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import { FeaturedVideo } from "@/components/FeaturedVideo";
 import { profile } from "@/data/profile";
 
-// Instant credibility layer — max 3 signals, shown directly under the hero.
-const CREDIBILITY = [
-  "1 production AI product shipped",
-  "Real-time LLM systems with API integrations",
-  "Active users in real-world workflows",
+// Proof line — concrete, verifiable signals shown directly under the subheadline.
+const PROOF_SIGNALS = [
+  "~14 early production users",
+  "35+ schema-validated tools",
+  "End-to-end delivery with security & licensing",
 ];
 
 const PROOF_ONELINER =
@@ -47,22 +47,13 @@ export default function Home() {
           >
             {identity.positioning}
           </p>
-          <div
-            className="animate-rise mt-10 flex flex-wrap items-center justify-center gap-3"
+
+          {/* Proof line — concrete evidence, directly under the subheadline */}
+          <ul
+            className="animate-fade mt-7 flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
             style={{ animationDelay: "0.16s" }}
           >
-            <ButtonLink href="/projects">View Projects</ButtonLink>
-            <ButtonLink href="/assistant" variant="secondary">
-              Open Career Assistant →
-            </ButtonLink>
-          </div>
-
-          {/* Instant credibility layer */}
-          <ul
-            className="animate-fade mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
-            style={{ animationDelay: "0.24s" }}
-          >
-            {CREDIBILITY.map((c) => (
+            {PROOF_SIGNALS.map((c) => (
               <li
                 key={c}
                 className="inline-flex items-center gap-2 rounded-full bg-[var(--color-surface)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--color-ink)] ring-1 ring-inset ring-[var(--color-hairline)]/70"
@@ -72,6 +63,16 @@ export default function Home() {
               </li>
             ))}
           </ul>
+
+          <div
+            className="animate-rise mt-9 flex flex-wrap items-center justify-center gap-3"
+            style={{ animationDelay: "0.24s" }}
+          >
+            <ButtonLink href="/projects">View Projects</ButtonLink>
+            <ButtonLink href="/assistant" variant="secondary">
+              Open Career Assistant →
+            </ButtonLink>
+          </div>
         </Container>
       </section>
 
@@ -285,7 +286,7 @@ export default function Home() {
           <SectionHeader
             eyebrow="Why companies hire me"
             title="Built to ship, not just to demo."
-            subtitle="What founders, CTOs, and clients get when they work with me."
+            subtitle="I ship production AI systems end-to-end — not just prototypes. Here's what that actually looks like in practice."
           />
           <div className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-[var(--color-hairline)]/70 bg-[var(--color-hairline)]/70 sm:grid-cols-2 lg:grid-cols-3">
             {whyHire.map((w) => (
