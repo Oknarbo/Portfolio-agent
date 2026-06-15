@@ -281,7 +281,7 @@ export const profile: Profile = {
       solution:
         "A local desktop copilot connected to Ableton via an official Control Surface Remote Script. It streams full session state (tracks, clips, devices, tempo) to a dual-LLM engine (Claude with a custom MCP of 35 schema-validated tools, plus Groq for sub-second responses). A hardened command pipeline enforces a 40-action allowlist, parameter sanitization, and a 12-command batch limit. A 5-step First Launch Wizard auto-installs the Remote Script, encrypts API keys (Fernet), and activates a machine-bound Gumroad license.",
       impact:
-        "Commercially launched (v2.0.1) and distributed via Gumroad for Windows and macOS. Passed independent AI security reviews (88/100 GPT-4o, 80/100 Grok) and Bandit static analysis with zero medium/high findings.",
+        "Commercially launched (v2.0.1) and distributed via Gumroad for Windows and macOS. Static analysis via Bandit (zero medium/high findings) plus a structured security audit before release.",
       architecture:
         "A desktop app (PyInstaller) talks to a local FastAPI + WebSocket engine, which connects to Ableton through an official Control Surface Remote Script. A dual-LLM router sends complex reasoning to Claude — over a custom MCP of 35 schema-validated tools — and quick queries to Groq for sub-second responses. Every requested action passes a hardened command pipeline before it ever reaches Ableton.",
       challenges: [
@@ -291,7 +291,7 @@ export const profile: Profile = {
         "Making it a real product: Fernet-encrypted API keys, machine-bound Gumroad licensing, and a 5-step first-launch wizard.",
       ],
       outcome:
-        "A commercially launched (v2.0.1) desktop product on Windows and macOS that passed independent AI security reviews (88/100 GPT-4o, 80/100 Grok) and Bandit static analysis with zero medium/high findings.",
+        "A commercially launched (v2.0.1) desktop product on Windows and macOS. Static analysis via Bandit (zero medium/high findings) plus a structured security audit before release.",
       production: {
         note: "Shipped to paying users in less than 3 months from first line of code — music producers running it inside their day-to-day Ableton Live sessions.",
         usage:
@@ -310,12 +310,12 @@ export const profile: Profile = {
         { value: "v2.0.1", label: "Commercially launched" },
         { value: "35", label: "Schema-validated MCP tools" },
         { value: "2 LLMs", label: "Claude + Groq routing" },
-        { value: "88/100", label: "Independent AI security review" },
+        { value: "Passed", label: "Structured security audit" },
         { value: "Win + macOS", label: "Distributed via Gumroad" },
         { value: "0", label: "Bandit medium/high findings" },
       ],
       metricsFootnote:
-        "Security review scores via independent GPT-4o (88/100) and Grok (80/100) assessments, plus Bandit static analysis (zero medium/high findings).",
+        "Static analysis via Bandit (0 medium/high findings) + structured security audit. Supplementary LLM-assisted review checks were also run as part of the audit methodology (GPT-4o: 88/100, Grok: 80/100).",
       videos: [
         { id: "m0WbmGFnUec", title: "Analyse my session" },
         { id: "iqlSgbPJB8M", title: "Add a MIDI track" },
