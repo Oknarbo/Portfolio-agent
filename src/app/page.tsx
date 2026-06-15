@@ -14,6 +14,15 @@ const CREDIBILITY = [
 const PROOF_ONELINER =
   "Real-time AI system integrated into Ableton Live, used in production workflows.";
 
+// Services shown in the post-proof CTA — kept concrete and engineering-focused.
+const AVAILABILITY = [
+  "AI Automation Engineering",
+  "Agent Systems",
+  "API Integrations",
+  "LLM Applications",
+  "Technical Consulting",
+];
+
 export default function Home() {
   const { identity, capabilities, whyHire, transition, skills, projects } =
     profile;
@@ -196,53 +205,52 @@ export default function Home() {
         </section>
       ) : null}
 
-      {/* ── Contact / CTA (immediately after proof — decision moment) ─ */}
+      {/* ── Immediate CTA after proof of work (decision moment) ───── */}
       <section className="py-12">
         <Container>
-          <div className="mx-auto max-w-4xl rounded-3xl border border-[var(--color-accent)]/25 bg-[var(--color-accent)]/[0.05] p-8 text-center sm:p-12">
-            <p className="text-[13px] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
-              Contact
-            </p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Let&apos;s work together
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-[17px] leading-relaxed text-[var(--color-subtle)]">
-              Available for AI automation, agent systems, and API integration
-              work.
-            </p>
+          <div className="mx-auto max-w-4xl rounded-3xl border border-[var(--color-accent)]/25 bg-[var(--color-accent)]/[0.05] p-8 sm:p-12">
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-[13px] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+                Production systems, not demos.
+              </p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
+                Ready to build something similar?
+              </h2>
+              <p className="mx-auto mt-4 text-[16px] leading-relaxed text-[var(--color-subtle)]">
+                I help companies build AI agents, workflow automations, API
+                integrations, and production-grade AI applications. Whether you
+                need an AI copilot, internal automation system, intelligent
+                workflow orchestration, or a custom LLM-powered tool, I can help
+                design and implement it.
+              </p>
+            </div>
 
+            {/* Availability — scannable service pills */}
+            <div className="mt-7">
+              <p className="text-center text-[12px] font-semibold uppercase tracking-wider text-[var(--color-subtle)]">
+                Available for
+              </p>
+              <ul className="mt-3 flex flex-wrap items-center justify-center gap-2">
+                {AVAILABILITY.map((a) => (
+                  <li
+                    key={a}
+                    className="inline-flex items-center gap-2 rounded-full bg-[var(--color-surface)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--color-ink)] ring-1 ring-inset ring-[var(--color-hairline)]/70"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Primary + secondary CTA */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <ButtonAnchor href={`mailto:${identity.email}`}>
                 Contact me
               </ButtonAnchor>
-              <ButtonLink href="/projects" variant="secondary">
-                Explore technical details →
-              </ButtonLink>
-            </div>
-
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[14px] font-medium">
-              <a
-                href={`mailto:${identity.email}`}
-                className="text-[var(--color-accent)] hover:underline"
-              >
-                {identity.email}
-              </a>
-              <a
-                href={identity.github}
-                target="_blank"
-                rel="noreferrer"
-                className="text-[var(--color-accent)] hover:underline"
-              >
-                GitHub ↗
-              </a>
-              <a
-                href={identity.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="text-[var(--color-accent)] hover:underline"
-              >
-                LinkedIn ↗
-              </a>
+              <ButtonAnchor href={identity.github} variant="secondary">
+                View GitHub ↗
+              </ButtonAnchor>
             </div>
           </div>
         </Container>
