@@ -33,7 +33,7 @@ export const config = {
   topK: 6,
 
   // ── Abuse / cost protection ─────────────────────────────────────
-  maxOutputTokens: Number(process.env.MAX_OUTPUT_TOKENS ?? 700),
+  maxOutputTokens: Number(process.env.MAX_OUTPUT_TOKENS ?? 3000),
   maxInputChars: Number(process.env.MAX_INPUT_CHARS ?? 6000),
   maxHistoryMessages: Number(process.env.MAX_HISTORY_MESSAGES ?? 12),
   rateLimitWindowMs: Number(process.env.RATE_LIMIT_WINDOW_MS ?? 10 * 60 * 1000),
