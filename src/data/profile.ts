@@ -115,7 +115,7 @@ export const profile: Profile = {
     email: "connect@branx.dev",
     github: "https://github.com/Oknarbo",
     linkedin: "https://www.linkedin.com/in/branimir-anticevic/",
-    website: "",
+    website: "https://branx.dev",
     upwork: "https://www.upwork.com/freelancers/branx",
     malt: "https://www.malt.com/profile/branimiranticevic",
     gumroad: "https://oknarbo.gumroad.com/l/nyhfbr",
@@ -123,7 +123,7 @@ export const profile: Profile = {
   },
 
   summary:
-    "I didn't start my career in software. After years in journalism, digital marketing, and customer-facing roles, I taught myself Python, agentic workflows, LLM systems, real-time integrations, and production AI development while working full-time. That journey led to Profesor Abelton — a commercially launched AI copilot for Ableton Live that I designed and built from scratch, combining a custom Model Context Protocol (MCP) with 35 schema-validated tools, a dual-LLM architecture (Claude + Groq), real-time session awareness, production security controls, licensing infrastructure, and automated onboarding. Today I build practical AI systems that solve real problems through agentic workflows, tool-calling, and software integration.",
+    "I didn't start my career in software. After years in journalism, digital marketing, and customer-facing roles, I taught myself Python, agentic workflows, LLM systems, real-time integrations, and production AI development while working full-time. That journey led to Profesor Abelton — a commercially launched AI copilot for Ableton Live that I designed and built from scratch, combining a custom Model Context Protocol (MCP) with 35 schema-validated tools, a dual-LLM architecture (Claude + Groq), real-time session awareness, production security controls, licensing infrastructure, and automated onboarding. Alongside that product I am building Zvonko, a Croatian-speaking family voice agent on ordinary phone calls (Twilio, Deepgram, Azure Speech, LangGraph), currently a working Hetzner pilot rather than a finished service, and the Global Government Content Removal Monitor — a source-faithful data product that turns platform transparency reports into a comparable map without mixing unlike metrics. Today I build practical AI and data systems that solve real problems through agentic workflows, tool-calling, and careful software integration.",
 
   capabilities: [
     {
@@ -152,9 +152,19 @@ export const profile: Profile = {
         "Real-time integrations with local and third-party APIs over REST and WebSockets.",
     },
     {
+      title: "Voice Agents",
+      description:
+        "Phone-first agents with STT/TTS, typed tools, confirmation gates, and scheduled callbacks.",
+    },
+    {
       title: "Full-Stack AI Apps",
       description:
         "Next.js + TypeScript front ends backed by Python AI services.",
+    },
+    {
+      title: "Source-Faithful Data Products",
+      description:
+        "Ingestion pipelines with snapshots, SHA-256 provenance, and interfaces that never mix unlike units.",
     },
     {
       title: "Python Backends",
@@ -190,6 +200,16 @@ export const profile: Profile = {
         "Comfortable taking a rough idea or one-line brief and turning it into a usable product with real users. Solo end-to-end delivery (architecture, implementation, security, distribution).",
     },
     {
+      title: "Safety-critical agent design, not just chat demos",
+      detail:
+        "Zvonko is a working phone-call pilot for family reminders and medication reports. Writes require an explicit spoken confirmation; inventory decrements only on an explicit taken-dose report; unanswered calls escalate on a defined contact order. It is a live-tested architecture on Hetzner, not a commercially launched product, and it does not claim medical verification or emergency response.",
+    },
+    {
+      title: "Journalism habits applied to data systems",
+      detail:
+        "The Content Removal Monitor treats transparency reports as sources with caveats: requests are not the same as removals, unlike metrics stay separate, and every measurement keeps a link to its official source and snapshot hash.",
+    },
+    {
       title: "Understands both sides of the table",
       detail:
         "16 years in journalism and marketing before switching to AI. I build for business outcomes, not just technical elegance, and can communicate clearly with both engineers and non-technical stakeholders.",
@@ -211,6 +231,7 @@ export const profile: Profile = {
     "Moved into digital marketing — closer to products, data, and the web.",
     "Got obsessed with AI and automation, and taught myself Python while working full-time.",
     "Designed, built, and commercially launched Profesor Abelton — a real, shipped AI product.",
+    "Now applying the same production discipline to a family voice agent (Zvonko) and a source-faithful civic data monitor.",
   ],
 
   timeline: [
@@ -224,9 +245,22 @@ export const profile: Profile = {
         "Designed and commercially launched production AI products from concept to deployment.",
         "Built agentic systems using LLM APIs, custom MCP architectures, tool-calling, and real-time integrations.",
         "Developed complete licensing, deployment, onboarding, and security infrastructure for desktop AI apps.",
+        "Building Zvonko, a Croatian phone-based family assistant: LangGraph dialogue, typed tools, Twilio Media Streams, Deepgram STT, Azure TTS, PostgreSQL, Redis/ARQ — live-tested on Hetzner as a pilot, not a finished production service.",
+        "Shipped a source-faithful Global Government Content Removal Monitor (FastAPI + React + MapLibre) over Google, X, Reddit, TikTok, and Lumen reports, with immutable snapshots and SHA-256 provenance.",
         "Expanding MCP-based architectures into additional software and hardware domains.",
       ],
-      stack: ["Python", "Claude API", "Groq", "MCP", "FastAPI", "WebSockets", "PyInstaller"],
+      stack: [
+        "Python",
+        "Claude API",
+        "Groq",
+        "MCP",
+        "FastAPI",
+        "LangGraph",
+        "Twilio",
+        "PostgreSQL",
+        "WebSockets",
+        "PyInstaller",
+      ],
     },
     {
       period: "Nov 2022 — Jul 2025",
@@ -349,7 +383,102 @@ export const profile: Profile = {
       ],
       outcome:
         "A live, queryable career interface with a Q&A mode and a Job Fit mode that scores a pasted job description against real profile data.",
-      links: [{ label: "GitHub", url: "https://github.com/Oknarbo" }],
+      links: [
+        { label: "GitHub", url: "https://github.com/Oknarbo/Portfolio-agent" },
+        { label: "Live site", url: "https://branx.dev" },
+      ],
+    },
+    {
+      slug: "zvonko",
+      title: "Zvonko — Family Call Agent",
+      tagline:
+        "A private, Croatian-speaking family assistant on ordinary phone calls — no app, no menus, no new technology for the family to learn.",
+      maturity: "wip",
+      category: "Agent Systems",
+      stack: [
+        "Python",
+        "FastAPI",
+        "LangGraph",
+        "Twilio",
+        "Deepgram",
+        "Azure Speech",
+        "PostgreSQL",
+        "Redis",
+        "ARQ",
+        "SQLAlchemy",
+      ],
+      problem:
+        "Older family members need reminders (medication, appointments, household safety) without learning a smartphone app. Existing assistants assume screens, English, and always-on personal devices.",
+      solution:
+        "One phone number. Family members call, ask for a reminder, and confirm what Zvonko understood. FastAPI validates transports; LangGraph manages dialogue in Croatian; typed tools validate arguments; domain services enforce authorization, confirmation, idempotency, and medication rules. Speech uses Deepgram Nova-3 (hr) and Azure hr-HR TTS over Twilio Voice / Media Streams. Language understanding defaults to deterministic Croatian rules; an optional OpenAI layer can paraphrase into the existing parser but cannot invoke tools or bypass confirmation.",
+      impact:
+        "Working pilot on Hetzner (PostgreSQL, Redis, Caddy, Twilio, Deepgram, Azure) — not a finished production service. Live tests have shown outbound calls, spoken reminders, an exact two-minute callback after a snooze, and an inbound request followed by a scheduled callback. Short spoken confirmations are still unreliable; the first audio bridge is half-duplex. Automatic outbound calls stay disabled until the operator enables them.",
+      architecture:
+        "Phone → Twilio Voice / Media Streams → Deepgram STT → LangGraph (identify caller, classify intent, extract arguments, confirm writes) → typed tools → domain services → PostgreSQL. Azure TTS returns audio to Twilio. An ARQ worker on Redis materializes due calls, retries unanswered attempts, and reconstructs jobs after interruption. Repositories encapsulate SQLAlchemy; provider adapters never simulate a successful production call. Single-family architecture, not multi-tenant. Audio stays in memory; the app does not record live calls.",
+      challenges: [
+        "Croatian speech on the phone: short confirmations (da/ne) are still unreliable; barge-in and turn boundaries remain open work.",
+        "Safety-critical writes: medication inventory decrements only on an explicit taken-dose report; ringing, silence, and 'not taken' do not subtract stock; idempotency prevents double subtraction.",
+        "Delivery vs. outcome: a completed call never proves a dose was taken or a safety task finished; voicemail counts as answered, never as confirmation.",
+        "Reliable scheduling: SQL outbox + ARQ, one-off/daily/weekly reminders, appointment offsets, bounded snoozes, and escalation (Branko, then Nataša) after two unanswered medication/safety attempts.",
+        "Replaceable providers (Twilio/Infobip, Deepgram, Azure, OpenAI/deterministic) without letting adapters fake success in development.",
+      ],
+      outcome:
+        "A live-tested Hetzner pilot with a full domain layer (reminders, inventory, appointments, audit), unit/graph/integration tests without paid calls, and a Croatian deterministic eval suite. Remaining work includes recognition quality, conversational coverage of existing tools, monitoring/backups, and affordable local inbound numbers. Source is private; access available to recruiters on request.",
+      metrics: [
+        { value: "Pilot", label: "Live on Hetzner" },
+        { value: "LangGraph", label: "Dialogue + typed tools" },
+        { value: "hr", label: "Croatian STT + TTS" },
+        { value: "Half-duplex", label: "First audio bridge" },
+        { value: "SQL + Redis", label: "Outbox + ARQ worker" },
+        { value: "Allowlist", label: "Caller-ID access control" },
+      ],
+      metricsFootnote:
+        "Pilot as of September 2026. Not a commercially launched product. Medication records reflect what a person reports, not physical verification. Zvonko does not give medical advice or provide emergency response.",
+    },
+    {
+      slug: "content-removal-monitor",
+      title: "Global Government Content Removal Monitor",
+      tagline:
+        "An interactive, source-faithful map of government requests to remove or restrict online content — without treating a request as a removal.",
+      maturity: "shipped",
+      category: "Other",
+      stack: [
+        "Python",
+        "FastAPI",
+        "SQLAlchemy",
+        "Alembic",
+        "React",
+        "TypeScript",
+        "MapLibre",
+        "TanStack Query",
+        "SQLite / PostgreSQL",
+      ],
+      problem:
+        "Platform transparency reports are public but incomparable: Google, X, Reddit, TikTok, and Lumen use different units, periods, and caveats. Dashboards that sum them invent a number that none of the sources actually reported.",
+      solution:
+        "A source-adapter pipeline: official reports → immutable raw snapshots with SHA-256 provenance → parse → validate → normalize. Each measurement keeps its official metric, country, period, source URL, and snapshot. The map (React + MapLibre) lets visitors filter by platform, period, and metric. Lumen stays separate as notice-level research, not platform totals. Public deployment serves generated JSON snapshots with the Vercel frontend so visitors avoid API cold starts; FastAPI remains the local/demo API. The same queries generate both representations.",
+      impact:
+        "A comparable geographic interface that preserves source meaning: requests received, cases actioned, accounts reported, and pieces of content stay separate. Missing values are not guessed; regional aggregates are not assigned to countries; transcribed PDF tables are labelled as such. Monthly Windows Task Scheduler workflow refreshes structured Google and TikTok sources.",
+      architecture:
+        "Official CSV/PDF/HTML sources are snapshotted with retrieval metadata and SHA-256 hashes. Source adapters (Google, X, Reddit, TikTok, Lumen) isolate fetch/parse/normalize/validate so a new platform does not change the map model. SQLite locally or PostgreSQL in production; FastAPI exposes platforms, periods, map, country, aggregates, and sources. The Vercel frontend reads exported JSON shaped like those endpoints.",
+      challenges: [
+        "Never combining unlike units even when every series is a count.",
+        "X 2024 PDF transcription vs. older X series that are not a comparable global dataset.",
+        "TikTok early periods that publish only a global total, and Reddit country charts that stay off the map until fully verified.",
+        "Import that fails closed on upstream schema changes instead of silently corrupting normalized data.",
+      ],
+      outcome:
+        "A shipped portfolio data product with parser tests (pytest) and a documented monthly update path. Contact: connect@branx.dev. Full source available to recruiters on request.",
+      metrics: [
+        { value: "5", label: "Platform sources" },
+        { value: "SHA-256", label: "Snapshot provenance" },
+        { value: "MapLibre", label: "Interactive choropleth" },
+        { value: "FastAPI", label: "OpenAPI contract" },
+        { value: "Vercel", label: "Static JSON frontend" },
+        { value: "Monthly", label: "Windows update task" },
+      ],
+      metricsFootnote:
+        "A request is not necessarily actioned, and content named in a request is not necessarily removed. Lumen notices are voluntarily shared records, not proof of removal.",
     },
     {
       slug: "profesor-david",
@@ -494,6 +623,8 @@ export const profile: Profile = {
         "Structured Outputs",
         "Prompt Engineering",
         "Session State Management",
+        "LangGraph",
+        "Voice agents (STT / TTS)",
       ],
     },
     {
@@ -507,8 +638,13 @@ export const profile: Profile = {
         "WebSockets",
         "REST APIs",
         "FastAPI",
+        "LangGraph",
         "Real-Time Integrations",
         "Next.js",
+        "React + MapLibre",
+        "PostgreSQL",
+        "Redis / ARQ",
+        "SQLAlchemy / Alembic",
         "PyInstaller",
         "Desktop App Development",
       ],
@@ -522,6 +658,9 @@ export const profile: Profile = {
         "License Systems",
         "Static Analysis (Bandit)",
         "Secure Local Deployments",
+        "Idempotent domain writes",
+        "Source provenance (SHA-256 snapshots)",
+        "Caller-ID allowlists",
       ],
     },
   ],
@@ -558,6 +697,39 @@ export const profile: Profile = {
         "Multi-DEX (Raydium, Orca, Jupiter, Meteora, OpenBook)",
         "Async real-time pool detection and filtering",
         "Risk controls: TP/SL and trailing stops",
+      ],
+    },
+    {
+      repo: "Oknarbo/Portfolio-agent",
+      description:
+        "This site: a grounded RAG career assistant over a single profile source of truth (Next.js, TypeScript). Recruiters can ask about projects and run Job Fit against real data.",
+      stack: ["Next.js", "TypeScript", "OpenAI / Groq / Claude"],
+      highlights: [
+        "Answers only from profile data; never invents experience",
+        "Job Fit mode for pasted job descriptions",
+        "Deployed at branx.dev",
+      ],
+    },
+    {
+      repo: "Zvonko (private)",
+      description:
+        "Private Croatian family call agent: LangGraph, typed tools, Twilio Media Streams, Deepgram, Azure Speech, PostgreSQL, Redis/ARQ. Working Hetzner pilot. Access available to recruiters on request.",
+      stack: ["Python", "FastAPI", "LangGraph", "Twilio", "PostgreSQL"],
+      highlights: [
+        "Confirmation-gated writes and medication inventory rules",
+        "Replaceable STT/TTS/telephony/LLM providers",
+        "Tests and Croatian deterministic evals without paid calls",
+      ],
+    },
+    {
+      repo: "Content Removal Monitor (private)",
+      description:
+        "Source-faithful monitor of government content-removal requests across Google, X, Reddit, TikTok, and Lumen. FastAPI + React/MapLibre, immutable snapshots, SHA-256 provenance. Access available to recruiters on request.",
+      stack: ["Python", "FastAPI", "React", "MapLibre", "SQLAlchemy"],
+      highlights: [
+        "Adapter boundary so unlike metrics are never combined",
+        "Idempotent imports with parser versions and snapshot hashes",
+        "Static JSON export for the public frontend",
       ],
     },
     {

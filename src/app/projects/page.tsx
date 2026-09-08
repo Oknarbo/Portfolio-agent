@@ -76,13 +76,24 @@ export default function ProjectsPage() {
           <CategoryHeader
             title="Other Shipped Products"
             tag="Completed"
-            subtitle="Finished, production-ready tools in blockchain and automation — solid work, but outside my core AI engineering focus."
+            subtitle="Finished, production-ready tools in data, blockchain, and automation — solid work, but outside the commercially launched AI-product flagship."
           />
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {shipped.map((p) => (
-              <CompactProjectCard key={p.slug} project={p} />
-            ))}
+          <div className="mt-8 space-y-8">
+            {shipped
+              .filter((p) => p.architecture)
+              .map((p) => (
+                <ProjectCard key={p.slug} project={p} />
+              ))}
           </div>
+          {shipped.some((p) => !p.architecture) ? (
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {shipped
+                .filter((p) => !p.architecture)
+                .map((p) => (
+                  <CompactProjectCard key={p.slug} project={p} />
+                ))}
+            </div>
+          ) : null}
         </section>
       ) : null}
 
