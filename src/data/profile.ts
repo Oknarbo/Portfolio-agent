@@ -423,7 +423,8 @@ export const profile: Profile = {
         "Replaceable providers (Twilio/Infobip, Deepgram, Azure, OpenAI/deterministic) without letting adapters fake success in development.",
       ],
       outcome:
-        "A live-tested Hetzner pilot with a full domain layer (reminders, inventory, appointments, audit), unit/graph/integration tests without paid calls, and a Croatian deterministic eval suite. Remaining work includes recognition quality, conversational coverage of existing tools, monitoring/backups, and affordable local inbound numbers. Source is private; access available to recruiters on request.",
+        "A live-tested Hetzner pilot with a full domain layer (reminders, inventory, appointments, audit), unit/graph/integration tests without paid calls, and a Croatian deterministic eval suite. Remaining work includes recognition quality, conversational coverage of existing tools, monitoring/backups, and affordable local inbound numbers. Public source: github.com/Oknarbo/family_call_agent.",
+      links: [{ label: "GitHub", url: "https://github.com/Oknarbo/family_call_agent" }],
       metrics: [
         { value: "Pilot", label: "Live on Hetzner" },
         { value: "LangGraph", label: "Dialogue + typed tools" },
@@ -468,7 +469,11 @@ export const profile: Profile = {
         "Import that fails closed on upstream schema changes instead of silently corrupting normalized data.",
       ],
       outcome:
-        "A shipped portfolio data product with parser tests (pytest) and a documented monthly update path. Contact: connect@branx.dev. Full source available to recruiters on request.",
+        "A shipped portfolio data product with parser tests (pytest) and a documented monthly update path. Live map plus public source.",
+      links: [
+        { label: "Live map", url: "https://global-government-content-removal-m.vercel.app" },
+        { label: "GitHub", url: "https://github.com/Oknarbo/global-government-content-removal-monitor" },
+      ],
       metrics: [
         { value: "5", label: "Platform sources" },
         { value: "SHA-256", label: "Snapshot provenance" },
@@ -711,9 +716,9 @@ export const profile: Profile = {
       ],
     },
     {
-      repo: "Zvonko (private)",
+      repo: "Oknarbo/family_call_agent",
       description:
-        "Private Croatian family call agent: LangGraph, typed tools, Twilio Media Streams, Deepgram, Azure Speech, PostgreSQL, Redis/ARQ. Working Hetzner pilot. Access available to recruiters on request.",
+        "Public source for Zvonko: Croatian family call agent with LangGraph, typed tools, Twilio Media Streams, Deepgram, Azure Speech, PostgreSQL, Redis/ARQ. Working Hetzner pilot.",
       stack: ["Python", "FastAPI", "LangGraph", "Twilio", "PostgreSQL"],
       highlights: [
         "Confirmation-gated writes and medication inventory rules",
@@ -722,9 +727,9 @@ export const profile: Profile = {
       ],
     },
     {
-      repo: "Content Removal Monitor (private)",
+      repo: "Oknarbo/global-government-content-removal-monitor",
       description:
-        "Source-faithful monitor of government content-removal requests across Google, X, Reddit, TikTok, and Lumen. FastAPI + React/MapLibre, immutable snapshots, SHA-256 provenance. Access available to recruiters on request.",
+        "Public source for the Global Government Content Removal Monitor: FastAPI + React/MapLibre over Google, X, Reddit, TikTok, and Lumen, with immutable snapshots and SHA-256 provenance. Live at global-government-content-removal-m.vercel.app.",
       stack: ["Python", "FastAPI", "React", "MapLibre", "SQLAlchemy"],
       highlights: [
         "Adapter boundary so unlike metrics are never combined",
