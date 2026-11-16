@@ -123,7 +123,7 @@ export const profile: Profile = {
   },
 
   summary:
-    "I didn't start my career in software. After years in journalism, digital marketing, and customer-facing roles, I taught myself Python, agentic workflows, LLM systems, real-time integrations, and production AI development while working full-time. That journey led to Profesor Abelton — a commercially launched AI copilot for Ableton Live that I designed and built from scratch, combining a custom Model Context Protocol (MCP) with 35 schema-validated tools, a dual-LLM architecture (Claude + Groq), real-time session awareness, production security controls, licensing infrastructure, and automated onboarding. Alongside that product I am building Zvonko, a Croatian-speaking family voice agent on ordinary phone calls (Twilio, Deepgram, Azure Speech, LangGraph), currently a working Hetzner pilot rather than a finished service, and the Global Government Content Removal Monitor — a source-faithful data product that turns platform transparency reports into a comparable map without mixing unlike metrics. Today I build practical AI and data systems that solve real problems through agentic workflows, tool-calling, and careful software integration.",
+    "I didn't start my career in software. After years in journalism, digital marketing, and customer-facing roles, I taught myself Python, agentic workflows, LLM systems, real-time integrations, and production AI development while working full-time. That journey led to Profesor Abelton — a commercially launched AI copilot for Ableton Live that I designed and built from scratch, combining a custom Model Context Protocol (MCP) with 35 schema-validated tools, a dual-LLM architecture (Claude + Groq), real-time session awareness, production security controls, licensing infrastructure, and automated onboarding. Alongside that product I am building Zvonko, a Croatian-speaking family voice agent on ordinary phone calls (Twilio, Deepgram, Azure Speech, LangGraph), currently a working Hetzner pilot rather than a finished service, and the Global Government Content Removal Monitor — a source-faithful data product that turns platform transparency reports into a comparable map without mixing unlike metrics. Since November 2026 I work as a contract AI Engineer at Alteox, where I built Child Story, a tested (not yet launched) pilot that turns family photos into animated films on local GPU hardware with human approval gates, and a human-reviewed content pipeline for the HeyMiela AI characters. Today I build practical AI and data systems that solve real problems through agentic workflows, tool-calling, and careful software integration.",
 
   capabilities: [
     {
@@ -235,6 +235,19 @@ export const profile: Profile = {
   ],
 
   timeline: [
+    {
+      period: "Nov 2026 — Present",
+      role: "AI Engineer (contract)",
+      company: "Alteox",
+      summary:
+        "Build generative-AI products for a small product team: a personalised AI family-film pilot and a content pipeline for AI-companion characters.",
+      highlights: [
+        "Child Story: built and tested a pilot that turns family photos into short animated films — order flow, multilingual site, ComfyUI pipeline on a DGX Spark (image, video, TTS, music, ffmpeg) and an operator console with human approval gates. Not launched; generation quality and a switch to faster models are the next step.",
+        "HeyMiela: built a Python content tool on the company's generation API — persona files, voice-over and caption checks with faster-whisper, a human review queue, and AI-labelled publishing to TikTok and Instagram (dry run by default).",
+        "Directed Claude Code agents for implementation and reviewed their work before merge (74 merged pull requests on Child Story).",
+      ],
+      stack: ["Python", "ComfyUI", "LTX Video", "Qwen-Image-Edit", "TTS", "ffmpeg", "Docker", "Claude Code"],
+    },
     {
       period: "Jul 2025 — Present",
       role: "Independent AI & Automation Developer",
@@ -387,6 +400,95 @@ export const profile: Profile = {
         { label: "GitHub", url: "https://github.com/Oknarbo/Portfolio-agent" },
         { label: "Live site", url: "https://branx.dev" },
       ],
+    },
+    {
+      slug: "child-story",
+      title: "Child Story / StoryStars — Personalised AI Family Films (Alteox)",
+      tagline:
+        "A family uploads one photo per person and gets a short animated film in which they are the cartoon characters — generated on local GPU hardware and checked by a human before delivery.",
+      maturity: "wip",
+      category: "AI",
+      stack: [
+        "Python",
+        "ComfyUI",
+        "Qwen-Image-Edit",
+        "LTX Video",
+        "Qwen3-VL",
+        "PocketTTS",
+        "Chatterbox",
+        "ACE-Step",
+        "ffmpeg",
+        "NVIDIA DGX Spark",
+        "JavaScript",
+        "Claude Code",
+      ],
+      problem:
+        "Personalised children's films are usually either generic templates with a pasted face or expensive hand-made animation. Fully automatic generative video is not reliable enough to send to a paying family without a person checking it: faces drift, outfits change between shots, and stories break their own logic.",
+      solution:
+        "An order flow plus an AI production pipeline with a human in the loop. Customers upload one photo per family member; a vision model checks each photo, and the pipeline draws every person as a cartoon character in one of 8 styles. Scene stills are made with Qwen-Image-Edit and animated into clips with LTX video in ComfyUI on a DGX Spark; narration and dialogue come from PocketTTS and Chatterbox, music from ACE-Step, and ffmpeg assembles the film. An operator console puts approval gates between the stages: a review deck for stills and clips, a film-sound preview, per-line voice variants, standing redo notes, people-free location plates, and an operator guide inside the console.",
+      impact:
+        "Built and tested end to end in about two weeks (November 2026) as a pilot, not a launched product: test orders went from photo upload to an assembled film through the operator console. At the internal review on 16 November the AI generation was judged not yet production-ready (image speed, outfit consistency between scenes, story logic), and the next step is a switch to faster image and video models (MOSS-Image, LTX 2.5).",
+      architecture:
+        "Static multilingual site (en/de/fr/es/it) with a cast builder, a 'test your own photo' preview and an order flow → Python backend (order state machine, job queue, mail outbox, retention and GDPR deletion) → ComfyUI workflows on a DGX Spark: character portraits per style, scene stills, video clips, then TTS, music and ffmpeg assembly with loudness normalisation. The operator console reads the same order state and blocks each next stage until a person approves it. The backend extended an existing ComfyUI proof of concept; the work was delivered through 74 merged pull requests, built with Claude Code agents under my direction and review.",
+      challenges: [
+        "Keeping a character recognisable and in the same outfit across every shot, and keeping more than three faces in one frame from breaking.",
+        "Adapting one story to families of different sizes (child alone up to larger families) with pair and trio scene templates and a group finale.",
+        "Making the free photo preview honest: the photo check and portrait render run in one GPU queue, so the measured preview is about 20 seconds, with a busy notice when the GPU is taken.",
+        "Designing operator tools that make fixing a bad shot faster than regenerating the whole film.",
+      ],
+      outcome:
+        "A working pilot with an order flow, operator console and full film pipeline on local GPU hardware. Not live for customers: payment, real email delivery and the model switch are still open, and generation quality needs another iteration before launch.",
+      metrics: [
+        { value: "Pilot", label: "Tested end to end" },
+        { value: "8", label: "Character art styles" },
+        { value: "5", label: "Site languages" },
+        { value: "74", label: "Merged pull requests" },
+        { value: "~2 weeks", label: "Build time" },
+        { value: "Human gates", label: "Operator approves each stage" },
+      ],
+      metricsFootnote:
+        "Built at Alteox, November 2026. Pilot, not a launched product; film narration in English and German only. Proprietary code, no public repository.",
+    },
+    {
+      slug: "heymiela-content",
+      title: "HeyMiela — AI Character Content Pipeline (Alteox)",
+      tagline:
+        "A content tool that turns a plan into reviewed social posts and video ads for AI-companion characters — every post approved by a person, every post labelled as AI.",
+      maturity: "wip",
+      category: "Automation",
+      stack: [
+        "Python",
+        "REST API",
+        "faster-whisper",
+        "ffmpeg",
+        "Pillow",
+        "TikTok Content Posting API",
+        "Instagram Graph API",
+        "Docker",
+      ],
+      problem:
+        "An AI-companion product needed a steady stream of social posts and video ads for a set of invented characters, each with a fixed face, voice and personality, without publishing anything unreviewed and in line with platform AI-labelling rules and the EU AI Act transparency duty.",
+      solution:
+        "A Python tool on top of the company's image and video generation API. Each character has a persona file (look, voice, content pillars, call to action); a content plan becomes 4:5 feed images and 9:16 videos with synthetic voice-over and burned-in captions. Faster-whisper re-transcribes every voice-over so missing or clipped words and caption timing are caught before review. A review queue requires the reviewer's own checks (face, hands and anatomy, every word audible, captions in sync) before an item can be approved; publishing to Instagram and TikTok is a dry run unless a person explicitly confirms a live post.",
+      impact:
+        "Produced the first character's pilot posts and video-ad cuts for the marketing team's review (10 s and 15 s, 9:16 and 4:5, with an end card). Made the first real TikTok post through the official Content Posting API as a private, AI-labelled test, and submitted the TikTok app for review. Public posting at scale has not started yet.",
+      architecture:
+        "Plan JSON → generation API (async jobs, capped and retried on HTTP 429) → voice-over, caption timing from word timestamps, ffmpeg render → local review queue (also deployable as a login-protected Docker server) → export or publish via Instagram (Facebook Login for Business) and TikTok Direct Post, with platform AI flags and an 'AI-generated character' first caption line enforced in code.",
+      challenges: [
+        "Synthetic voices that rushed, clipped word onsets or dropped sentences: solved with per-character pace bands, per-sentence variants and a word-by-word check of the final mix.",
+        "Vision models missed hand and pose errors, so anatomy stays a mandatory human check.",
+        "Platform rules: AI flags and visible labels are required before approval, and live posting stays off by default.",
+      ],
+      outcome:
+        "A working content and ads tool with a human review gate. Publishing works end to end in a private test; the TikTok app review was submitted in November 2026 and the Instagram path still needs public media hosting.",
+      metrics: [
+        { value: "100%", label: "Posts human-reviewed" },
+        { value: "AI label", label: "Enforced in code" },
+        { value: "2", label: "Platforms (IG + TikTok)" },
+        { value: "Dry run", label: "Default publishing mode" },
+      ],
+      metricsFootnote:
+        "Built at Alteox, November 2026. Proprietary code, no public repository.",
     },
     {
       slug: "zvonko",
